@@ -1,0 +1,163 @@
+<div class="section__landing-demos">
+  <div class="nova-container">
+    <div class="landing-demos__title">
+      <h1 class="special-font">{{section.settings.title}}</h1>
+      <p>{{section.settings.sub_title}}</p>
+    </div>
+    <div class="landing-demos__items row">
+      {% for block in section.blocks %}
+      <div class="demo-item col-md-3 fadeInUp">
+        <div class="item-inner incify-lazyload-image" data-background-image="{{ block.settings.demo_image | img_url: 'master' }}" data-auto-padding="true">
+          <a target="_blank" href="{{ block.settings.demo_url }}">
+            <span>{{ block.settings.demo_name }}</span>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Landing Demos",
+  "class": "index-section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "demo_item",
+      "name": "Demo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "demo_image",
+          "label": "Demo Image"
+        },
+        {
+          "type": "text",
+          "id": "demo_name",
+          "label": "Demo Name"
+        },
+        {
+          "type": "url",
+          "id": "demo_url",
+          "label": "Demo Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing Demos",
+      "category": "Landing Page",
+      "blocks": [
+        {
+          "type": "demo_item"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}
+{% stylesheet 'scss' %}
+.section__landing-demos {
+  margin-top: 90px;
+
+  .landing-demos__title {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .landing-demos__items {
+    margin: 45px 0;
+    .demo-item {
+      padding: 30px;
+      text-align: center;
+      text-transform: uppercase;
+
+      .item-inner {
+        display: block;
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center top;
+        box-shadow: 0 0 20px 0 rgba(133, 133, 133, 0.3);
+        a {
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          color: #fff;
+
+          &:before {
+            content: "";
+            background: #232324;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 250ms ease-out;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+          }
+
+          span {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -5%;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all .3s;
+
+            &:after {
+              content: "";
+              width: 55px;
+              height: 55px;
+              display: block;
+              margin: 25px auto 0;
+              background: #f2504b url(http://helas.la-studioweb.com/landing/images/tail-right.png) no-repeat center center;
+              border-radius: 50%;
+              transition: all .3s;
+            }
+          }
+        }
+      }
+    }
+
+    .demo-item:hover a:before {
+      opacity: 0.5;
+      visibility: visible;
+    }
+
+    .demo-item:hover a span {
+      margin-top: -10%;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  }
+
+{% endstylesheet %}

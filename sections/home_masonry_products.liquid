@@ -1,0 +1,235 @@
+<div data-section-id="{{ section.id }}" data-section-type="home-masonry-product" class="section__home-masonry-product layout-{{ section.settings.preset }}">
+  <div class="nova-container">
+    <div class="row">
+      {% case section.settings.preset %}
+        {% when 'style_2' %}
+          <div class="col-md-12">
+            <div class="home-masonry-product__title">
+              <h1>{{ section.settings.collection_title }}</h1>
+            </div>
+            <div class="category-products">
+              {% if section.settings.collection !='' %}
+              {% assign collection = collections[section.settings.collection] %}
+              <ul class="home-masonry-products-grid products-grid">
+                {% for product in collection.products limit: section.settings.product_limit %}
+                <li class="item product product-layout-grid">
+                    {% include 'product-tab-grid-item' %}
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+        {% else %}
+          <div class="col-md-2">
+            <div class="home-masonry-product__title">
+              <h1>{{ section.settings.collection_title }}</h1>
+            </div>
+          </div>
+          <div class="col-md-10 category-products">
+            {% if section.settings.collection !='' %}
+            {% assign collection = collections[section.settings.collection] %}
+            <ul class="home-masonry-products-grid products-grid">
+              {% for product in collection.products limit: section.settings.product_limit %}
+              <li class="item product product-layout-grid">
+                  {% include 'product-tab-grid-item' %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+      {% endcase %}
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+body div[data-section-id="{{ section.id }}"] .home-masonry-product__title h1{
+  {% if section.settings.title_color != blank %}
+  color: {{ section.settings.title_color }};
+  {% endif %}
+}
+body div[data-section-id="{{ section.id }}"]..layout-style_2 {
+  background-color: {{ section.settings.background_color }};
+}
+</span>
+
+{% schema %}{
+"name": "Masonry Products",
+"settings": [
+  {
+   "type": "select",
+   "id": "preset",
+       "options": [
+          { "value": "style_1", "label": "Style 1"},
+          { "value": "style_2", "label": "Style 2"}
+       ],
+       "label": "Preset",
+       "default": "style_1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Preset Style 2 Background Color",
+      "default": "#F8D0C1"
+    },
+    {
+    "type": "header",
+    "content": "Product Settings"
+    },
+    {
+      "type": "text",
+      "id": "collection_title",
+      "label": "Collection Title",
+      "default": "default"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#E2F3F2"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Product Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Product Limit",
+      "default": 3,
+      "info": "info",
+      "min": 1,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "Styles Settings"
+    },
+    {
+     "type": "checkbox",
+     "id": "enable_style",
+     "default": false,
+     "label": "Enable Style Settings"
+    },
+    {
+        "type":      "range",
+        "id":        "style_top",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Top",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_bottom",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Bottom",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_left",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Left",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_right",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Right",
+        "default":   0
+    }
+	],
+	"presets": [{
+      "name": "Masonry Products",
+      "category": "Home Page"
+  	}]
+}
+{% endschema %}
+{% stylesheet 'scss' %}.section__home-masonry-product {
+  .home-masonry-products-grid {
+    margin: 10em auto 2em;
+    position: relative;
+    padding: 0 1em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    li {
+      padding: 0 3vw !important;
+    	margin: 0;
+      &:first-child {
+        margin-top: 8em;
+      }
+      &:nth-child(2) {
+          margin-top: 16em;
+      }
+      &:nth-child(3) {
+
+      }
+    }
+  }
+  &.layout-style_1 {
+    .home-masonry-product__title {
+      position: relative;
+      text-align: right;
+      h1 {
+        position: absolute;
+        top: 329px;
+        left: -212px;
+        font-size: 149px;
+        font-weight: 600;
+        line-height: 1;
+        text-transform: uppercase;
+        transform: rotate(-90deg);
+      }
+    }
+  }
+  &.layout-style_2 {
+    background-color: #F8D0C1;
+    &:before {
+      display: block;
+       content: "";
+       background-image: url('../assets/shape-top.png');
+       background-repeat: no-repeat;
+       background-position: top center;
+       height: 219px;
+    }
+    &:after {
+      display: block;
+       content: "";
+       background-image: url('../assets/shape-bottom.png');
+       background-repeat: no-repeat;
+       background-position: top center;
+       height: 184px;
+    }
+    .home-masonry-product__title {
+      display: inline-block;
+      position: relative;
+      text-align: right;
+      h1 {
+        font-size: 149px;
+        font-weight: 700;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+    }
+    .home-masonry-products-grid {
+      margin-top: 0;
+    }
+  }
+}
+{% endstylesheet %}

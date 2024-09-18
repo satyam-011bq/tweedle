@@ -1,0 +1,290 @@
+{% assign limit = section.settings.product_list_limit %}
+{% if section.settings.product_list_column != '5' and section.settings.product_list_column != '7' %}
+{% assign col = 12 | divided_by: section.settings.product_list_column %}
+{% else %}
+{% assign col = section.settings.product_list_column %}
+{% endif %}
+{% assign product_limitation = 0 %}
+<section data-section-id="{{ section.id }}" class="section_product_list mt-lg-6 mt-md-4 mt-xs-3 {{ section.id }}{% if section.settings.background_color != blank %} lg-pt-75 lg-pb-75 xs-pt-50 xs-pb-50{% endif %}">
+    {% include "block_title" %}
+    {% if section.settings.preset == 'style_1' %}
+    <div class="{% if section.settings.layout == 'full_width' %}container-fluid EL_row_padding_65{% else %}container{% endif %}">
+        <div class="main-tab-products lg-mt-50 md-mt-30 sm-mt-10">
+            <div class="tab-product-collection">
+                <div class="category-detail ">
+                    <div class="tab-content">
+                        {% if section.settings.product_list_collection_use !='' %}
+                        <div class="tab-pane active" id="collection1">
+                            <div class="category-products">
+                                {% assign collection1 = collections[section.settings.product_list_collection_use] %}
+                                <ul class="products-grid columns{{section.settings.product_list_column}} flex-grid" style="margin:0 -10px;">
+                                    {% for product in collection1.products limit: section.settings.product_list_limit %}
+                                    <li class="item product product-layout-grid">
+                                        {% include 'product-tab-grid-item' %}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if section.settings.preset == 'style_2' %}
+    <div class="nova-container">
+      <div class="shop-metro">
+        <div class="category-products products-style-2-list">
+            <ul id="products-grid" class="products-grid masonry-grid metro-masonry-grid" data-item-width="420" data-item-height="500" data-md-col="3" data-sm-col="2" data-xs-col="2" data-mb-col="1">
+                {% assign i = 0 %}
+                {% assign collection1 = collections[section.settings.product_list_collection_use] %}
+                {% for product in collection1.products limit: section.settings.product_list_limit %}
+                {% assign i = i | plus: 1 %}
+                <li class="item product product-layout-grid"{% if i == 3 or i == 9 %} data-width="2" data-height="1"{% else %} data-width="1" data-height="1"{% endif %}>
+                  {% include 'product-masonry-grid-item' %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if section.settings.read_more_link != blank %}
+      <div class="container">
+          <div class="more-product">
+              <a href="{{section.settings.read_more_link}}" class="nova-button rounded uppercase shadow-hover">{{ section.settings.read_more }}</a>
+          </div>
+      </div>
+    {% endif %}
+</section>
+<span class="custom-styles-css">
+.section_product_list.{{ section.id }}{
+  {% if section.settings.background_color != blank %}
+  background-color: {{ section.settings.background_color }};
+  {% endif %}
+  {% if section.settings.enable_style == true %}
+    {% if section.settings.style_top != '' %}
+    margin-top:{{ section.settings.style_top }}px;
+    {% endif %}
+    {% if section.settings.style_bottom != '' %}
+    margin-bottom:{{ section.settings.style_bottom }}px;
+    {% endif %}
+    {% if section.settings.style_left != '' %}
+    margin-left:{{ section.settings.style_left }}px;
+    {% endif %}
+    {% if section.settings.style_right != '' %}
+    margin-right:{{ section.settings.style_right }}px;
+    {% endif %}
+  {% endif %}
+}
+</span>
+{% schema %}
+{
+"name": "Product List",
+"settings": [
+{
+"type": "header",
+"content": "Main Product List"
+},
+{
+  "type": "select",
+  "id": "preset",
+  "label": "Preset",
+  "options": [
+{
+  "value": "style_1",
+  "label": "Style 1"
+},
+{
+  "value": "style_2",
+  "label": "Style 2"
+},
+{
+  "value": "style_3",
+  "label": "Style 3"
+}
+],
+"default": "style_1"
+},
+{
+  "type": "color",
+  "id": "background_color",
+  "label": "Backgound Color"
+},
+{
+  "type": "select",
+  "id": "layout",
+  "label": "Layout",
+  "options": [
+{
+  "value": "boxed",
+  "label": "Boxed"
+},
+{
+  "value": "full_width",
+  "label": "Full Width"
+}
+],
+"default": "full_width"
+},
+{
+"type": "header",
+"content": "Title Settings"
+},
+{
+"type": "select",
+"id": "preset_section_title",
+"label": "Preset Section Title",
+"options": [
+{
+"value": "style_1",
+"label": "Style 1"
+},
+{
+"value": "style_2",
+"label": "Style 2"
+},
+{
+"value": "style_3",
+"label": "Style 3"
+},
+{
+"value": "style_4",
+"label": "Style 4"
+},
+{
+"value": "style_5",
+"label": "Style 5"
+},
+{
+"value": "style_6",
+"label": "Style 6"
+},
+{
+"value": "style_7",
+"label": "Style 7"
+},
+{
+"value": "style_8",
+"label": "Style 8"
+}
+],
+"default": "style_1"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Collection title"
+},
+{
+"type": "text",
+"id": "sub_title",
+"label": "Collection Sub title"
+},
+{
+"type": "header",
+"content": "Content Settings"
+},
+{
+"type": "text",
+"id": "product_list_limit",
+"label": "Number of products to show",
+"default": "12"
+},
+{
+"type": "text",
+"id": "product_list_column",
+"label": "Products per row",
+"default": "4"
+},
+{
+"type": "header",
+"content": "Product List Collection"
+},
+{
+"type": "collection",
+"id": "product_list_collection_use",
+"label": "Collection use:"
+},
+{
+"type": "header",
+"content": "Read More Settings"
+},
+{
+"type": "text",
+"id": "read_more",
+"label": "Read More"
+},
+{
+"type": "url",
+"id": "read_more_link",
+"label": "Read More Link"
+},
+{
+  "type": "header",
+  "content": "Styles Settings"
+},
+{
+ "type": "checkbox",
+ "id": "enable_style",
+ "default": false,
+ "label": "Enable Style Settings"
+},
+{
+    "type":      "range",
+    "id":        "style_top",
+    "min":       0,
+    "max":        500,
+    "step":       5,
+    "unit":       "px",
+    "label":     "Space Top",
+    "default":   0
+},
+{
+    "type":      "range",
+    "id":        "style_bottom",
+    "min":       0,
+    "max":        500,
+    "step":       5,
+    "unit":       "px",
+    "label":     "Space Bottom",
+    "default":   0
+},
+{
+    "type":      "range",
+    "id":        "style_left",
+    "min":       0,
+    "max":        500,
+    "step":       5,
+    "unit":       "px",
+    "label":     "Space Left",
+    "default":   0
+},
+{
+    "type":      "range",
+    "id":        "style_right",
+    "min":       0,
+    "max":        500,
+    "step":       5,
+    "unit":       "px",
+    "label":     "Space Right",
+    "default":   0
+}
+],
+"presets": [
+{
+"name": "Product List Collection",
+"category": "Collection"
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

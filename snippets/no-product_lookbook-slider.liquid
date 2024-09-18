@@ -1,0 +1,8 @@
+{% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+<a href="#">{{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}</a>
+<a class="product-title" href="#">Product Title</a>
+<div class="price-box">
+  <div class="price">
+    <span class="money">$0.01</span>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+{% comment %}
+This page represents the /collections and /products pages.
+It is an optional, but highly recommended, template for your theme.
+
+More info:
+- http://docs.shopify.com/manual/configuration/store-customization/taking-control-of-collections-listing
+{% endcomment %}
+{% section 'collection_page_header' %}
+<div class="nova-container">
+  <div class="main-collection">
+    <div class="nova-row">
+        <div class="category-products clearfix">
+            <ul id="products-grid" class="products-grid columns4">
+
+                {% for collection in collections %}
+                {% if collection.handle != 'frontpage' and collection.all_products_count > 0 %}
+                <li class="item product product-layout-grid">
+                    {% include 'collection-grid-item' %}
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+  </div>
+</div>

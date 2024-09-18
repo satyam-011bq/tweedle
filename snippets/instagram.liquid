@@ -1,0 +1,34 @@
+<div class="instagram-image">
+    <div class="content-image-intagram">
+        <div id="rudr_instafeed" class="slide-no-space" data-slick='{"slidesToShow":{{ section.settings.grid }},"slidesToScroll":{{ section.settings.grid }},"dots":false,"autoplaySpeed":5000,"speed":300,"infinite":false,"arrows":false,"swipe":true,"draggable":true,"touchMove":true,"pauseOnHover":false,"responsive":[{"breakpoint":1824,"settings":{"slidesToShow":{{ section.settings.grid }},"slidesToScroll":{{ section.settings.grid }}}},{"breakpoint":1200,"settings":{"slidesToShow":{{ section.settings.grid }},"slidesToScroll":{{ section.settings.grid }}}},{"breakpoint":992,"settings":{"slidesToShow":3,"slidesToScroll":3}},{"breakpoint":768,"settings":{"slidesToShow":2,"slidesToScroll":2}},{"breakpoint":480,"settings":{"slidesToShow":1,"slidesToScroll":1}}],"pauseOnDotsHover":true}'></div>
+    </div>
+</div>
+{% if settings.token_intagram != blank %}
+<script>
+    var token = '{{ settings.token_intagram }}',
+        {% if section.settings.hashtag != '' %}
+        hashtag = "{{ section.settings.hashtag }}", // hashtag without # symbol
+        {% endif %}
+        num_photos = {{ section.settings.limit }};
+
+    $.ajax({
+        {% if section.settings.hashtag != '' %}
+        url: 'https://api.instagram.com/v1/tags/' + hashtag + '/media/recent',
+        {% else %}
+        url: 'https://api.instagram.com/v1/users/self/media/recent',
+        {% endif %}
+        dataType: 'json',
+        type: 'GET',
+        data: {access_token: token, count: num_photos},
+        success: function(data){
+            for( x in data.data ){
+                $('#rudr_instafeed').append('<div class="item"><a style="background-image:url('+data.data[x].images.standard_resolution.url+');" target="_blank" href="' + data.data[x].link + '"><span class="item--overlay"></span><span class="instagram-info"><span class="instagram-like"><i class="fa fa-heart"></i>'+data.data[x].likes.count+'</span><span class="instagram-comments"><i class="fa fa-comments"></i>'+data.data[x].comments.count+'</span></span></a></div>');
+            };
+            $('#rudr_instafeed').slick();
+        },
+        error: function(data){
+            console.log(data);
+        }
+    });
+</script>
+{% endif %}

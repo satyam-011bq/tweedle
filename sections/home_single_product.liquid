@@ -1,0 +1,44 @@
+<div data-section-id="{{ section.id }}" class="section__home-product-single mt-5 mb-6">
+  <div class="container">
+    <div class="home-product-single product-view product">
+      {% assign product = all_products[section.settings.product] %}
+      {% if product.url != blank %}
+        {% include "home-product-single" %}
+      {% else %}
+        {% include "no-product_lookbook-slider" %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+<script>
+    productsObj.id{{product.id}} = {{product | json}};
+</script>
+{% schema %}
+{
+  "name": "Single Product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "image_size",
+      "label": "Product Image Size",
+      "default": "953x510",
+      "placeholder": "953x510"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Single Product",
+      "category": "Home Page"
+    }
+  ]
+}
+{% endschema %}

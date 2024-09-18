@@ -1,0 +1,109 @@
+{% if section.settings.enable == true %}
+<div data-section-id="{{ section.id }}" class="section__about-us-service-box lg-pt-90 md-pt-50 xs-pt-30 lg-pb-90 md-pb-50 xs-pb-30">
+  <div class="container">
+    <div class="nova-row">
+      {% if section.settings.title != blank %}
+      <div class="about-us-box__title">
+        <h4>{{ section.settings.title }}</h4>
+      </div>
+      {% endif %}
+      <div class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-4 large-up-4 incify-icon-box">
+        {% for block in section.blocks limit: section.blocks.size %}
+        <div class="cell">
+          <div class="icon-boxes-inner">
+            <div class="box-heading-top">
+              <div class="box-icon-heading">
+                <div class="box-icon-inner type-img">
+                  <div class="wrap-icon">
+                    <div class="box-icon box-icon-style-simple">
+                      <span>
+                        {% if block.settings.image != blank %}
+                          <img src="{{ block.settings.image | img_url: 'master' }}" />
+                        {% else %}
+                          {{ 'image' | placeholder_svg_tag }}
+                        {% endif %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="box-heading">
+                <h5 class="icon-heading">{{ block.settings.title }}</h5>
+              </div>
+            </div>
+            <div class="box-contents">
+              <div class="box-description">
+                <p>{{ block.settings.text }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+body div[data-section-id="{{ section.id }}"]{
+  background-color: {{ section.settings.background_color }}
+}
+</span>
+{% endif %}
+{% schema %}
+{
+  "name": "Services Box",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Box Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable Content Box",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Your goals are our priority"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_box",
+      "name": "Icon Box",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services Box",
+      "category": "About Us V2"
+    }
+  ]
+}
+{% endschema %}

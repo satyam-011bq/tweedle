@@ -1,0 +1,15 @@
+<!-- /templates/product.liquid -->
+{% assign variant_tmp = product.selected_or_first_available_variant | default: product.variants.first %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+{% section 'product_page_header' %}
+{% assign media_col = settings.product_image_size %}
+{% assign main_col = 12 | minus: settings.product_image_size %}
+{% if settings.type_detail == 'type1' %}
+{% include 'product_style_1' %}
+{% endif %}
+{% if settings.type_detail == 'type2' %}
+{% include 'product_style_2' %}
+{% endif %}
+{% if settings.type_detail == 'type3' %}
+{% include 'product_style_3' %}
+{% endif %}

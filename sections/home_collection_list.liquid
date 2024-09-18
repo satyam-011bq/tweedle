@@ -1,0 +1,215 @@
+<div data-section-id="{{ section.id }}" class="top-collection-section preset-{{ section.settings.preset }} layout-{{ section.settings.top_collection_display }} mt-lg-6 mt-md-5 mt-xs-4">
+    {% include "block_title" %}
+    <div class="collection-section">
+      <div class="{% if section.settings.top_collection_width_screen == 'full' %}container-fluid{% if section.settings.top_collection_display != 'slide' %} EL_row_padding_65{% endif %}{% endif %}{% if section.settings.top_collection_width_screen == 'boxed' %}nova-container{% endif %}{% if section.settings.top_collection_width_screen == '1170px' %}container{% endif %}">
+        {% if section.settings.top_collection_display == 'slide' %}
+        <div class="slick-carousel collection-banner-content-slider content-visible-when-hover" data-slick='{"slidesToShow":2,"slidesToScroll":1,"dots":true,"autoplaySpeed":5000,"speed":300,"infinite":true,"arrows":false,"swipe":true,"draggable":true,"touchMove":true,"pauseOnHover":false,"responsive":[{"breakpoint":1824,"settings":{"slidesToShow":2,"slidesToScroll":2}},{"breakpoint":1200,"settings":{"slidesToShow":2,"slidesToScroll":2}},{"breakpoint":992,"settings":{"slidesToShow":1,"slidesToScroll":1}},{"breakpoint":768,"settings":{"slidesToShow":1,"slidesToScroll":1}},{"breakpoint":480,"settings":{"slidesToShow":1,"slidesToScroll":1}}],"pauseOnDotsHover":true}'>
+
+            {% for block in section.blocks limit: section.blocks.size %}
+            {%- assign collection = collections[block.settings.collection] -%}
+            {% include 'home-collection-grid-item' %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if section.settings.top_collection_display == 'grid' %}
+        <div class="collection-banner-content grid-x grid-padding-y grid-padding-x small-up-1 medium-up-{{section.settings.grid}} large-up-{{section.settings.grid}} content-visible-when-hover">
+            {% for block in section.blocks limit: section.blocks.size %}
+            {%- assign collection = collections[block.settings.collection] -%}
+            {% include 'collection-grid-item' %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+.top-collection-section.preset-{{ section.settings.preset }}{
+  {% if section.settings.background_color != blank %}
+  background-color: {{ section.settings.background_color }};
+  {% endif %}
+  {% if section.settings.enable_style == true %}
+    {% if section.settings.style_top != '' %}
+    margin-top:{{ section.settings.style_top }}px !important;
+    {% endif %}
+    {% if section.settings.style_bottom != '' %}
+    margin-bottom:{{ section.settings.style_bottom }}px !important;
+    {% endif %}
+    {% if section.settings.style_left != '' %}
+    margin-left:{{ section.settings.style_left }}px !important;
+    {% endif %}
+    {% if section.settings.style_right != '' %}
+    margin-right:{{ section.settings.style_right }}px !important;
+    {% endif %}
+  {% endif %}
+}
+</span>
+{% schema %}
+{
+  "name": "Collection Slider",
+  "class": "index-section",
+  "max_blocks": 12,
+  "settings": [{
+      "type": "select",
+      "id": "preset_section_title",
+      "label": "Preset Section Title",
+      "options": [{
+          "value": "style_1",
+          "label": "Style 1"
+        },
+        {
+          "value": "style_2",
+          "label": "Style 2"
+        }
+      ],
+      "default": "style_1"
+    },
+    {
+    "type": "text",
+    "id": "background_color",
+    "label": "Background Color"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Heading"
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": "Collections per row",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "preset",
+      "label": "Display Preset",
+      "options": [{
+          "value": "style_1",
+          "label": "Style_1"
+        },
+        {
+          "value": "style_2",
+          "label": "Style_2"
+        }
+      ],
+      "default": "style_1"
+    },
+    {
+      "type": "select",
+      "id": "top_collection_display",
+      "label": "Display Type",
+      "options": [{
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "slide",
+          "label": "Slider"
+        }
+      ],
+      "default": "slide"
+    },
+
+    {
+      "type": "select",
+      "id": "top_collection_width_screen",
+      "label": "Display Full Width / Boxed",
+      "options": [{
+          "value": "full",
+          "label": "Full Width"
+        },
+        {
+          "value": "boxed",
+          "label": "Boxed"
+        },
+        {
+          "value": "1170px",
+          "label": "1170px"
+        }
+      ],
+      "default": "boxed"
+    },
+    {
+      "type": "header",
+      "content": "Styles Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_style",
+      "default": false,
+      "label": "Enable Style Settings"
+    },
+    {
+      "type": "range",
+      "id": "style_top",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_bottom",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_left",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_right",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Right",
+      "default": 0
+    }
+  ],
+  "blocks": [{
+    "type": "featured_collection",
+    "name": "Collection",
+    "settings": [{
+        "label": "Collection",
+        "id": "collection",
+        "type": "collection"
+      },
+  	  {
+  		"type": "text",
+  		"id": "banner_button",
+  		"label": "Banner Button"
+  	  }
+    ]
+  }],
+  "presets": [{
+    "name": "Collection list",
+    "category": "Collection",
+    "blocks": [{
+      "type": "featured_collection"
+    }]
+  }]
+}
+{% endschema %}

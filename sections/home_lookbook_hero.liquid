@@ -1,0 +1,303 @@
+<div data-section-id="{{ section.id }}" class="section__nova-lookbook-hero">
+      <div class="nova-lookbook-hero">
+        {% for block in section.blocks %}
+          {% include 'lookbook-item-hero' %}
+        {% endfor %}
+      </div>
+</div>
+{% schema %}
+{
+  "name": "Lookbook Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Settings"
+    },
+    {
+      "type": "text",
+      "id": "image_size",
+      "label": "Product Image Size",
+      "default": "130x150",
+      "placeholder": "130x150"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "lookbook_item",
+      "name": "Lookbook Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Sub Title"
+        },
+        {
+          "type": "text",
+          "id": "button_1",
+          "label": "Button"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Button 1 Url"
+        },
+        {
+          "type": "text",
+          "id": "button_2",
+          "label": "Button 2"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Button 2 Url"
+        },
+        {
+          "type": "header",
+          "content": "Product #1 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p1_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p1_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p1_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p1_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "header",
+          "content": "Product #2 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p2_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p2_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p2_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p2_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "header",
+          "content": "Product #3 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p3_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p3_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p3_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p3_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "header",
+          "content": "Product #4 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p4_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p4_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p4_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p4_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lookbook Hero",
+      "category": "Lookbook"
+    }
+  ]
+}
+{% endschema %}
+{% javascript %}
+// Generated by CoffeeScript 1.9.2
+(function() {
+
+  $(function() {
+    return $("[data-sticky_column]").stick_in_parent({
+      parent: "[data-sticky_parent]",
+      offset_top:250
+    });
+  });
+  $(window).on("resize", (function(_this) {
+    return function(e) {
+      return $(document.body).trigger("sticky_kit:recalc");
+    };
+  })(this));
+}).call(this);
+{% endjavascript %}

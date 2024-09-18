@@ -1,0 +1,51 @@
+<!--start pin-{{block.settings.p3_product}}-->
+{% assign product_3 = all_products[block.settings.p3_product] %}
+<div class="pin__item  pin--number-3" style="top:{{ block.settings.p3_v_pos }}%;left:{{ block.settings.p3_h_pos }}%;">
+  <div class="pin__item-spot">
+    <a href="{{ product_3.url }}"><span>+</span></a>
+    <div class="pin__item-content pos--{{ block.settings.p3_caption }}">
+      <div class="pin__item-content-product">
+        {% if product_3.url != blank %}
+        <a href="{{ product_3.url }}"><img src="{{ product_3.featured_image.src | img_url: section.settings.image_size, crop: 'center' }}" /></a>
+          <a class="product-title" href="{{ product_3.url }}">{{ product_3.title }}</a>
+          <div class="price-box">
+            <div class="price">
+              {% if on_sale %}
+              {% if product_3.price_varies %}
+              {% assign sale_price_3 = product_3.price | money %}
+              <span class="money">
+                {{ 'products.product.on_sale_from_html' | t: price: sale_price_3 }}
+              </span>
+              {% else %}
+              <div class="special-price">
+                <span class="money">{{ product_3.price | money }}</span>
+              </div>
+              {% endif %}
+              {% else %}
+              {% if product_3.price_varies %}
+              {% assign price_3 = product_3.price | money %}
+              <span class="money">{{ 'products.general.from_text_html' | t: price: price_3 }}</span>
+              {% else %}
+              <span class="money">
+                {{ product_3.price | money }}
+              </span>
+              {% endif %}
+              {% endif %}
+              {% if sold_out %}
+              <span class="money">{{ 'products.product.sold_out' | t }}</span>
+              {% endif %}
+              {% if on_sale %}
+              <div class="compare-price">
+                <span class="money">{{ product_3.compare_at_price | money }}</span>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% else %}
+          {% include "no-product_lookbook-slider" %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!--end pin-{{block.settings.p3_product}}-->

@@ -1,0 +1,86 @@
+<div data-section-id="{{ section.id }}" data-section-type="featured-collections-section" class="section__featured-collections">
+  <div class="featured-collections">
+    {% for block in section.blocks %}
+    {% assign collection = collections[block.settings.collection] %}
+    <div class="featured-collections__item lg-mt-120 md-mt-60 xs-mt-30">
+      <div class="row">
+        <div class="col-md-6 featured-collections__item--img{% if block.settings.position == 'right' %} order-lg-last{% endif %}">
+          {% if collection.image  != blank %}
+            <img src="{{ collection.image | img_url: 'master' }}" />
+          {% else %}
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+        <div class="col-md-6{% if block.settings.position == 'right' %} order-lg-first {% endif %}">
+          <div class="featured-collections__item--desc">
+            {% if collection.title != blank %}
+              <h1>{{ collection.title }}</h1>
+            {% else %}
+              <h1>Empty Collection Title</h1>
+            {% endif %}
+            <p>
+              {% if collection.description != blank %}
+                {{ collection.description }}
+              {% else %}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed pulvinar sem, eu euismod nisl. Vestibulum commodo nulla ac risus auctor ultrices. Phasellus vel ultricies ante.
+              {% endif %}
+            </p>
+            <a href="{{ collection.url }}" class="nova-button btn-lg rounded bordered uppercase btn-icon">{{'collections.general.view_collection' | t}} <svg viewBox="0 0 20 20"><use xlink:href="#karic-button_arrow"></use></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Featured Collections",
+  "class": "index-section",
+  "max_blocks": 20,
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Collection Position",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "label": "Collection",
+          "id": "collection",
+          "type": "collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collections",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

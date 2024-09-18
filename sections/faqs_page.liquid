@@ -1,0 +1,98 @@
+{% if section.settings.enable == true %}
+<div class="faq-box-title text-center md-mt-90 sm-mt-30">
+      	  <h1>{{ section.settings.heading_title }}</h1>
+      	</div>
+<div data-section-id="{{ section.id }}" class="section__faq-content">
+  <div class="container">
+    <div class="row">
+      <div class="nova-column col-md-12">
+        <div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-2 faq-box-inner">
+          <div class="cell">
+            {% assign block_id = 0 %}
+            {% for block in section.blocks limit: section.blocks.size %}
+            {% assign block_id = block_id | plus: 1 %}
+            {% if block.type == 'headline' %}
+            {% if block_id != 1 %}
+          </div>
+          
+          <div class="cell">
+            {% endif %}
+            <h3>{{ block.settings.title }}</h3>
+            {% elsif block.type == 'faq_item' %}
+            <div class="item">
+                <div class="content">
+                    <div class="content-faqs">
+                        <div class="pertinacia">
+                            <p class="faqs">{{ block.settings.title }} <i class="zyra-icon icon-ui-2-small-add"></i></p>
+                            <p class="faqs2" style="display: none;">{{ block.settings.text }}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{
+  "name": "FAQ Content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Box Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable Content Box",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "headline",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Content",
+      "category": "FAQ Page"
+    }
+  ]
+}
+{% endschema %}

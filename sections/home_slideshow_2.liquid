@@ -1,0 +1,321 @@
+<div data-section-id="{{ section.id }}" class="section__slideshow-2">
+  <div class="nova-container">
+    <div class="row no-gutters home-slideshow-2">
+      <div class="col-md-7">
+        <div class="home-slideshow-2__left">
+          <div class="slide-item">
+            <div class="slide-item__inner" style="background-color:{{ section.settings.slide_1_bg }}; height: {{section.settings.slider_1_height}}vh">
+              <div class="slide-item--image">
+                <img src="{{ section.settings.slide_1_image | img_url: 'master' }}" />
+              </div>
+              <div class="slide-item--content">
+                {{ section.settings.slide_1_content }}
+                {% if section.settings.slide_1_button != blank %}
+                <a class="nova-button rounded primary uppercase" href="{{ section.settings.slide_1_button_url }}">{{ section.settings.slide_1_button }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="slick-carousel home-slideshow-2__right home-slideshow-2__right--1" data-slick='{"dots":true,"arrows":false}'>
+          {% for block in section.blocks %}
+            {% if block.type == 'slideshow_item_1' %}
+              <div class="slide-item">
+                <div class="slide-item__inner" style="background-color:{{ block.settings.slide_1_bg }}; background-image: url({{ block.settings.slide_1_image | img_url: 'master' }}); background-size: contain; background-position: center right; background-repeat: no-repeat; height: {{section.settings.slider_2_height}}vh">
+                  <div class="slide-item__content {{ block.settings.text_color }}">
+                    <h1>{{ block.settings.slide_1_title }}</h1>
+                    {% if block.settings.slide_1_button != blank %}
+                    <a class="slide-button" href="{{ block.settings.slide_1_button_url }}">{{ block.settings.slide_1_button }}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="slick-carousel home-slideshow-2__right home-slideshow-2__right--2" data-slick='{"dots":true,"arrows":false}'>
+          {% for block in section.blocks %}
+            {% if block.type == 'slideshow_item_2' %}
+            <div class="slide-item">
+              <div class="slide-item__inner" style="background-color:{{ block.settings.slide_1_bg }}; background-image: url({{ block.settings.slide_1_image | img_url: 'master' }}); background-size: contain; background-position: center right; background-repeat: no-repeat; height: {{section.settings.slider_2_height}}vh">
+                <div class="slide-item__content {{ block.settings.text_color }}">
+                  <h1>{{ block.settings.slide_1_title }}</h1>
+                  {% if block.settings.slide_1_button != blank %}
+                  <a class="slide-button" href="{{ block.settings.slide_1_button_url }}">{{ block.settings.slide_1_button }}</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+div[data-section-id="{{ section.id }}"] {
+
+}
+</span>
+
+{% schema %}{
+  "name": "Slideshow 2",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left Settings"
+    },
+    {
+        "type":      "range",
+        "id":        "slider_1_height",
+        "min":       10,
+        "max":        100,
+        "step":       1,
+        "unit":       "vh",
+        "label":     "Left Banner Height",
+        "default":   70
+    },
+    {
+        "type":      "range",
+        "id":        "slider_2_height",
+        "min":       10,
+        "max":        100,
+        "step":       1,
+        "unit":       "vh",
+        "label":     "Right Slider 01 Height",
+        "default":   35
+    },
+    {
+        "type":      "range",
+        "id":        "slider_3_height",
+        "min":       10,
+        "max":        100,
+        "step":       1,
+        "unit":       "vh",
+        "label":     "Right Slider 02 Height",
+        "default":   35
+    },
+    {
+      "type": "color",
+      "id": "slide_1_bg",
+      "label": "Slide Background Color"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_1_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "textarea",
+      "id": "slide_1_content",
+      "label": "Banner Content"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_button",
+      "label": "Banner Button"
+    },
+    {
+      "type": "url",
+      "id": "slide_1_button_url",
+      "label": "Button Url"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slideshow_item_1",
+      "name": "Right Slider 01 Item",
+      "settings": [
+        {
+          "type": "color",
+          "id": "slide_1_bg",
+          "label": "Slide Background Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide_1_image",
+          "label": "Slide Background Image"
+        },
+        {
+           "type": "select",
+           "id": "text_color",
+           "options": [
+              { "value": "light", "label": "Light"},
+              { "value": "dark", "label": "Dark"}
+           ],
+           "label": "Text Color",
+           "default": "light"
+        },
+        {
+          "type": "text",
+          "id": "slide_1_title",
+          "label": "Slide Title"
+        },
+        {
+          "type": "text",
+          "id": "slide_1_button",
+          "label": "Slide Button"
+        },
+        {
+          "type": "url",
+          "id": "slide_1_button_url",
+          "label": "Button Url"
+        }
+      ]
+    },
+    {
+      "type": "slideshow_item_2",
+      "name": "Right Slider 02 Item",
+      "settings": [
+        {
+          "type": "color",
+          "id": "slide_1_bg",
+          "label": "Slide Background Color"
+        },
+        {
+          "type": "image_picker",
+          "id": "slide_1_image",
+          "label": "Slide Background Image"
+        },
+        {
+           "type": "select",
+           "id": "text_color",
+           "options": [
+              { "value": "light", "label": "Light"},
+              { "value": "dark", "label": "Dark"}
+           ],
+           "label": "Text Color",
+           "default": "light"
+        },
+        {
+          "type": "text",
+          "id": "slide_1_title",
+          "label": "Slide Title"
+        },
+        {
+          "type": "text",
+          "id": "slide_1_button",
+          "label": "Slide Button"
+        },
+        {
+          "type": "url",
+          "id": "slide_1_button_url",
+          "label": "Button Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow 2",
+      "category": "Home Page"
+    }
+  ]
+}
+{% endschema %}
+{% stylesheet 'scss' %}.section__slideshow-2 {
+  .home-slideshow-2 {
+    overflow: hidden;
+    .home-slideshow-2__left {
+      z-index: 1;
+      .slide-item {
+        position: relative;
+        .slide-item--image {
+            position: absolute;
+            right: -200px;
+            z-index: 9;
+        }
+        .slide-item--content {
+          position: absolute;
+          top: 50%;
+          left: 10%;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+          transform: translateY(-50%);
+          h1 {
+            font-size: 70px;
+            line-height: 1.2;
+            color: #fff;
+            margin-bottom: 30px;
+          }
+          h3 {
+            font-size: 36px;
+            line-height: 1.2;
+            color: #fff;
+            font-weight: 600;
+            max-width: 680px;
+          }
+          p {
+            margin-top: 30px;
+            color: #fff;
+            max-width: 500px;
+          }
+          .nova-button {
+            margin-top: 30px;
+          }
+        }
+      }
+    }
+    .home-slideshow-2__right
+     {
+       .slide-item__inner {
+          position: relative;
+       }
+       .slide-item__content {
+         position: absolute;
+         top: 50%;
+         left: 35%;
+         text-align: center;
+         -webkit-transform: translateY(-50%);
+         -moz-transform: translateY(-50%);
+         -ms-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+         transform: translateY(-50%);
+         h1 {
+           font-size: 40px;
+           line-height: 1.2;
+           margin-bottom: 30px;
+           text-transform: uppercase;
+         }
+         .slide-button {
+           font-size: 12px;
+           font-weight: 600;
+           text-decoration: underline;
+         }
+         &.light {
+           h1,.slide-button {
+             color: #fff;
+           }
+         }
+       }
+       .slick-dots {
+         bottom: 20px;
+         li {
+           width: 20px;
+           height: 20px;
+         }
+         li button:before {
+           opacity: 1;
+           font-size: 13px;
+           color: #fff;
+           width: 20px;
+           height: 20px;
+           line-height: 20px;
+         }
+         li.slick-active button:before {
+            opacity: 1;
+            font-size: 13px;
+        }
+       }
+       &.slick-dotted.slick-slider {
+         margin-bottom: 0;
+       }
+    }
+  }
+}
+{% endstylesheet %}

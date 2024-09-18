@@ -1,0 +1,17 @@
+{% case settings.product_aspect_ratio %}
+{% when '1' %}
+{%- assign image_width = settings.product_ratio_width -%}
+{%- assign image_height = '' -%}
+{% else %}
+{%- assign image_width = settings.product_ratio_width -%}
+{%- assign image_height = settings.product_ratio_height -%}
+{% endcase %}
+{% capture image_size %}{{ image_width }}x{{ image_height }}{% endcapture %}
+{%- assign image_lb_width = settings.product_lightbox_width -%}
+{%- assign image_lb_height = settings.product_lightbox_height -%}
+{% capture image_lb_size %}{{ image_lb_width }}x{{ image_lb_height }}{% endcapture %}
+<div class="product-image js-pswp-box-inner">
+    {% for image in product.images %}
+    <img data-large_image="{{ image.src | img_url: image_lb_size }}" data-large_image_width="{{ image_lb_width }}" data-large_image_height="{{ image_lb_height }}" class="img-responsive js-pswp-image" src="{{ image.src | img_url: image_size }}" />
+    {% endfor %}
+</div>

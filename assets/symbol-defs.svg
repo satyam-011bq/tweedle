@@ -1,0 +1,28 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="karic-arrow-left" viewBox="0 0 32 32">
+<title>arrow-left</title>
+<path stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M31 16h-30"></path>
+<path stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M11 6l-10 10 10 10"></path>
+</symbol>
+<symbol id="karic-arrow-right" viewBox="0 0 32 32">
+<title>arrow-right</title>
+<path stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M1 16h30"></path>
+<path stroke-width="2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round" d="M21 6l10 10-10 10"></path>
+</symbol>
+<symbol id="karic-header-users" viewBox="0 0 32 32">
+<title>header-users</title>
+<path d="M16 6.667c-3.733 0-6.667 2.933-6.667 6.667v2.667c0 3.733 2.933 6.667 6.667 6.667s6.667-2.933 6.667-6.667v-2.667c0-3.733-2.933-6.667-6.667-6.667zM20 16c0 2.267-1.733 4-4 4s-4-1.733-4-4v-2.667c0-2.267 1.733-4 4-4s4 1.733 4 4v2.667z"></path>
+<path d="M16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16c8.8 0 16-7.2 16-16s-7.2-16-16-16zM10.133 28c1.067-0.8 2.533-1.333 3.867-1.333h4c1.467 0 2.8 0.4 3.867 1.333-1.733 0.933-3.733 1.333-5.867 1.333s-4.133-0.533-5.867-1.333zM24.267 26.4c-1.733-1.6-4-2.4-6.267-2.4h-4c-2.4 0-4.533 0.933-6.267 2.4-3.067-2.4-5.067-6.133-5.067-10.4 0-7.333 6-13.333 13.333-13.333s13.333 6 13.333 13.333c0 4.267-2 8-5.067 10.4z"></path>
+</symbol>
+<symbol id="karic-mini-cart" viewBox="0 0 32 32">
+<title>mini-cart</title>
+<path d="M2.251 31.427h26.189c0.393 0 0.786-0.131 1.048-0.393s0.393-0.655 0.262-1.048l-2.619-20.951c-0.131-0.655-0.655-1.179-1.309-1.179h-3.928v-1.309c0-3.667-2.881-6.547-6.547-6.547s-6.547 2.881-6.547 6.547v1.309h-3.928c-0.655 0-1.179 0.524-1.309 1.179l-2.619 20.951c0 0.393 0.131 0.786 0.262 1.048 0.262 0.262 0.655 0.393 1.048 0.393zM11.417 6.547c0-2.226 1.702-3.928 3.928-3.928s3.928 1.702 3.928 3.928v1.309h-7.857v-1.309zM6.048 10.476h2.75v2.619c0 0.786 0.524 1.309 1.309 1.309s1.309-0.524 1.309-1.309v-2.619h7.857v2.619c0 0.786 0.524 1.309 1.309 1.309s1.309-0.524 1.309-1.309v-2.619h2.75l2.357 18.332h-23.308l2.357-18.332z"></path>
+</symbol>
+<symbol id="karic-search-icon" viewBox="0 0 32 32">
+<title>search-icon</title>
+<path d="M14 28c-7.72 0-14-6.28-14-14s6.28-14 14-14c7.72 0 14 6.28 14 14s-6.28 14-14 14zM14 4c-5.514 0-10 4.486-10 10s4.486 10 10 10c5.514 0 10-4.486 10-10s-4.486-10-10-10z"></path>
+<path d="M31.414 28.586l-4.786-4.786c-0.822 1.058-1.77 2.006-2.828 2.828l4.786 4.786c0.39 0.39 0.902 0.586 1.414 0.586s1.024-0.196 1.414-0.586c0.782-0.782 0.782-2.046 0-2.828z"></path>
+</symbol>
+</defs>
+</svg>

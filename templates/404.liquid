@@ -1,0 +1,18 @@
+<!-- /templates/404.liquid -->
+<div class="page-404">
+    <div class="nova-container">
+    	<div class="nova-row">
+	        <!-- div class="img-404">
+	            <img src="{{ '404.png' | asset_url }}">
+	        </div -->
+	        <div class="title-404">
+	            <h2 class="title" {% if settings.language_enable %}data-translate="general.404.title"{% endif %}>{{ 'general.404.title' | t }}</h2>
+	            <h4 class="sub-title" {% if settings.language_enable %}data-translate="general.404.sub-title"{% endif %}>{{ 'general.404.sub-title' | t }}</h4>
+	            <p class="text" {% if settings.language_enable %}data-translate="general.404.text"{% endif %}>{{ 'general.404.text' | t }}</p>
+	        </div>
+	        <div class="button-to-home">
+	            <a href="/" class="nova-button bordered rounded uppercase">{% if settings.404_text_button != blank %}{{settings.404_text_button}}{% endif %}</a>
+	        </div>
+        </div>
+    </div>
+</div>

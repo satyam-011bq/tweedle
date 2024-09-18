@@ -1,0 +1,315 @@
+{%- capture CFH -%}{{ content_for_header }}{%- endcapture -%}
+{%- if CFH contains 'DesignMode' -%}
+{%- assign NovaAdmin = true -%}
+{%- else -%}
+{%- assign NovaAdmin = false -%}
+{%- endif -%}
+<div data-section-id="{{ section.id }}" class="section__nova-lookbook-slider lg-mt-90 md-mt-60 xs-mt-30">
+  <div class="nova-container">
+      <div class="nova-lookbook-slider">
+        <div class="{% if NovaAdmin %}grid-x grid-padding-x grid-padding-y small-up-{{ section.settings.column_mobile }} medium-up-{{ section.settings.column_tablet }} large-up-{{ section.settings.column }}{% else %}slick-carousel slide-no-space{% endif %}" data-slick='{"slidesToShow":{{ section.settings.column }},"slidesToScroll":{{ section.settings.column }},"dots":false,"autoplaySpeed":5000,"speed":300,"infinite":false,"swipe":true,"draggable":true,"touchMove":true,"prevArrow":"<div class=\"slider-arrow arrow-prev\"><svg viewBox=\"0 0 20 20\"><use xlink:href=\"#karic-arrow-left\"></use></svg></div>","nextArrow":"<div class=\"slider-arrow arrow-next\"><svg viewBox=\"0 0 20 20\"><use xlink:href=\"#karic-arrow-right\"></use></svg></div>","responsive":[{"breakpoint":1824,"settings":{"slidesToShow":{{ section.settings.column }},"slidesToScroll":{{ section.settings.column }}}},{"breakpoint":1200,"settings":{"slidesToShow":{{ section.settings.column_tablet }},"slidesToScroll":{{ section.settings.column_tablet }}}},{"breakpoint":992,"settings":{"slidesToShow":{{ section.settings.column_tablet }},"slidesToScroll":{{ section.settings.column_tablet }}}},{"breakpoint":768,"settings":{"slidesToShow":{{ section.settings.column_tablet }},"slidesToScroll":{{ section.settings.column_tablet }}}},{"breakpoint":480,"settings":{"slidesToShow":{{ section.settings.column_mobile }},"slidesToScroll":{{ section.settings.column_mobile }}}}],"pauseOnDotsHover":true}'>
+          {% for block in section.blocks %}
+            {% include 'lookbook-item-slider' %}
+          {% endfor %}
+        </div>
+      </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+  body div[data-section-id="{{ section.id }}"] .nova-lookbook-item .pin__item .pin__item-spot a>span {
+    background-color:{{ section.settings.pin_color }};
+  }
+</span>
+{% schema %}
+{
+  "name": "Lookbook Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "column",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "col",
+      "label": "Columns",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "column_tablet",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "col",
+      "label": "Columns in Tablet",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "column_mobile",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "col",
+      "label": "Columns in Mobile",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Pin Settings"
+    },
+    {
+      "type": "color",
+      "id": "pin_color",
+      "label": "Pin Color",
+      "default": "#A60505"
+    },
+    {
+      "type": "header",
+      "content": "Products Settings"
+    },
+    {
+      "type": "text",
+      "id": "image_size",
+      "label": "Product Image Size",
+      "default": "130x150",
+      "placeholder": "130x150"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "lookbook_item",
+      "name": "Lookbook Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Product #1 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p1_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p1_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p1_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p1_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "header",
+          "content": "Product #2 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p2_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p2_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p2_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p2_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "header",
+          "content": "Product #3 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p3_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p3_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p3_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p3_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        },
+        {
+          "type": "header",
+          "content": "Product #4 Settings"
+        },
+        {
+          "type": "product",
+          "id": "p4_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "range",
+          "id": "p4_h_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal position",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "p4_v_pos",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical position",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "id": "p4_caption",
+          "label": "Caption position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "bottom"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lookbook Slider",
+      "category": "Lookbook"
+    }
+  ]
+}
+{% endschema %}

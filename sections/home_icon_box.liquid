@@ -1,0 +1,181 @@
+<div data-section-id="{{ section.id }}" class="section__icon_box {{section.settings.preset}} lg-mt-130 md-mt-100 sm-mt-60 xs-mt-50">
+  <div class="{% if section.settings.enable_full == true %}container-fluid{% else %}container{% endif %} incify-icon-box helas-icon-box">
+    <div class="row">
+      <div class="grid-x{% if section.settings.enable_space == true %} grid-padding-y grid-padding-x{% endif %} small-up-1 medium-up-3 large-up-{{section.settings.grid}}">
+        {% for block in section.blocks limit: section.blocks.size %}
+        <div class="cell"{% if block.settings.background_color != blank %} style="background-color: {{ block.settings.background_color }}"{% endif %}>
+          <div class="icon-boxes-inner">
+            {% case .section.settings.preset %}
+            {% when 'style_2' %}
+            {% include "icon_box_style_2" %}
+            {% else %}
+            {% include "icon_box_style_1" %}
+            {% endcase %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+  body div[data-section-id="{{ section.id }}"]{
+    {% if section.settings.background_color != blank %}
+    background-color: {{ section.settings.background_color }};
+    {% endif %}
+    {% if section.settings.enable_style == true %}
+    {% if section.settings.style_top != '' %}
+    margin-top:{{ section.settings.style_top }}px;
+    {% endif %}
+    {% if section.settings.style_bottom != '' %}
+    margin-bottom:{{ section.settings.style_bottom }}px;
+    {% endif %}
+    {% if section.settings.style_left != '' %}
+    margin-left:{{ section.settings.style_left }}px;
+    {% endif %}
+    {% if section.settings.style_right != '' %}
+    margin-right:{{ section.settings.style_right }}px;
+    {% endif %}
+    {% endif %}
+  }
+</span>
+{% schema %}
+{
+"name": "Icon Box",
+"settings": [
+    {
+      "type": "header",
+      "content": "Preset Settings"
+    },
+    {
+    "type": "select",
+    "id": "preset",
+    "label": "Preset",
+    "options": [
+    {
+    "value": "style_1",
+    "label": "Style 1"
+    },
+    {
+    "value": "style_2",
+    "label": "Style 2"
+    }
+    ],
+    "default": "style_1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background"
+    },
+    {
+      "type": "header",
+      "content": "Grid Settings"
+    },
+    {
+        "type":      "range",
+        "id":        "grid",
+        "min":       2,
+        "max":        5,
+        "step":       1,
+        "label":     "Grid",
+        "default":   3
+    },
+    {
+     "type": "checkbox",
+     "id": "enable_full",
+     "default": false,
+     "label": "Enable Full Width"
+    },
+    {
+     "type": "checkbox",
+     "id": "enable_space",
+     "default": true,
+     "label": "Enable Space"
+    },
+    {
+      "type": "header",
+      "content": "Styles Settings"
+    },
+    {
+     "type": "checkbox",
+     "id": "enable_style",
+     "default": false,
+     "label": "Enable Style Settings"
+    },
+    {
+        "type":      "range",
+        "id":        "style_top",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Top",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_bottom",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Bottom",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_left",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Left",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_right",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Right",
+        "default":   0
+    }
+	],
+  "blocks": [
+    {
+      "type": "icon_box",
+      "name": "Icon Box",
+      "settings": [
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color",
+          "info": "Just apply for Preset Style 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+	"presets": [{
+      "name": "Icon Box",
+      "category": "Icon Box"
+  	}]
+}
+{% endschema %}

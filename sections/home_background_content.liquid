@@ -1,0 +1,267 @@
+{% if section.settings.play_icon != blank %}
+{% assign button = section.settings.play_icon | img_url: "master" %}
+{% else %}
+{% assign button = 'm3-icon-play.png' | asset_url %}
+{% endif %}
+<div data-section-id="{{ section.id }}" class="background-content-section {{ section.settings.preset }} {{ section.settings.content_preset }} {% if section.settings.enable_parallax == true %} parallax-box{% endif %}">
+  <div class="background-content">
+    <div class="container">
+      <div class="row">
+        <div class="backhground-content__inner">
+            <div class="background-content__content">
+              {%- if  section.settings.text_1 !=blank -%}
+              <div class="text-1">
+                {{ section.settings.text_1 }}
+              </div>
+              {%- endif -%}
+              {%- if  section.settings.text_2 !=blank -%}
+              <div class="text-2{% if section.settings.preset == 'style_1' or section.settings.preset == 'style_2' %} special-font{% endif %}">
+                {{ section.settings.text_2 }}
+              </div>
+              {%- endif -%}
+              {%- if  section.settings.text_3 !=blank -%}
+              <div class="text-3">
+                {{ section.settings.text_3 }}
+              </div>
+              {%- endif -%}
+              <div class="banner-button">
+                {%- if  section.settings.button_link !=blank -%}
+                  {%- if section.settings.preset == 'style_3' or section.settings.preset == 'style_4' -%}
+                    <a href="{{section.settings.button_link}}" class="btn-button bordered-2 white uppercase">{{section.settings.button_title}}</a>
+                  {%- else -%}
+                    <a href="{{section.settings.button_link}}" class="btn-button white uppercase">{{section.settings.button_title}}</a>
+                  {%- endif -%}
+                {%- endif -%}
+                {% if section.settings.video_id != blank %}
+                  {% if section.settings.video_source == 'vimeo' %}
+                  <a class="button-play" href="https://player.vimeo.com/video/{{section.settings.video_id}}?autoplay=1" data-rel="lightcase"><img src="{{button}}" alt="" /></a>
+                  {% else %}
+                  <a class="button-play" href="//www.youtube.com/embed/{{video_id}}?version=3" data-rel="lightcase"><img src="{{button}}" alt="" /></a>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+body div[data-section-id="{{ section.id }}"]{
+  {% if section.settings.enable_style == true %}
+    {% if section.settings.style_top != '' %}
+    margin-top:{{ section.settings.style_top }}px;
+    {% endif %}
+    {% if section.settings.style_bottom != '' %}
+    margin-bottom:{{ section.settings.style_bottom }}px;
+    {% endif %}
+    {% if section.settings.style_left != '' %}
+    margin-left:{{ section.settings.style_left }}px;
+    {% endif %}
+    {% if section.settings.style_right != '' %}
+    margin-right:{{ section.settings.style_right }}px;
+    {% endif %}
+  {% endif %}
+  {% if section.settings.background %}
+  background-image:url({{ section.settings.background | img_url: 'master' }});
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  {% endif %}
+  height: {{  section.settings.box_height }}vh;
+}
+body div[data-section-id="{{ section.id }}"] .backhground-content__inner {
+  height: {{  section.settings.box_height }}vh;
+}
+</span>
+{% schema %}
+{
+  "name": "Backgound Content",
+  "settings": [{
+      "type": "select",
+      "id": "preset",
+      "label": "Preset",
+      "options": [{
+          "value": "style_1",
+          "label": "Style 1"
+        },
+        {
+          "value": "style_2",
+          "label": "Style 2"
+        },
+        {
+          "value": "style_3",
+          "label": "Style 3"
+        },
+        {
+          "value": "style_4",
+          "label": "Style 4"
+        },
+        {
+          "value": "style_5",
+          "label": "Style 5"
+        },
+        {
+          "value": "style_6",
+          "label": "Style 6"
+        }
+      ],
+      "default": "style_1"
+    },
+    {
+      "type": "header",
+      "content": "Backgound Content Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "default": false,
+      "label": "Enable Parallax Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Banner Background"
+    },
+    {
+      "type": "range",
+      "id": "box_height",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "vh",
+      "label": "Box Height",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "select",
+      "id": "content_preset",
+      "label": "Content Preset",
+      "options": [{
+          "value": "content_preset_light",
+          "label": "Light"
+        },
+        {
+          "value": "content_preset_dark",
+          "label": "Dark"
+        }
+      ],
+      "default": "content_preset_light"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "Text 1"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Text 2"
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Text 3"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Label"
+    },
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
+    {
+    "type": "select",
+    "id": "video_source",
+    "label": "Video Source",
+    "options": [
+    {
+    "value": "youtube",
+    "label": "Youtube"
+    },
+    {
+    "value": "vimeo",
+    "label": "Vimeo"
+    }
+    ],
+    "default": "youtube"
+    },
+    {
+      "type": "text",
+      "id": "video_id",
+      "label": "Video",
+      "placeholder": "Vimeo or Youtube video ID"
+    },
+    {
+      "type": "image_picker",
+      "id": "play_icon",
+      "label": "Custom Play Icon"
+    },
+    {
+      "type": "header",
+      "content": "Styles Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_style",
+      "default": false,
+      "label": "Enable Style Settings"
+    },
+    {
+      "type": "range",
+      "id": "style_top",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_bottom",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_left",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_right",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Right",
+      "default": 0
+    }
+  ],
+  "presets": [{
+    "name": "Backgound Content",
+    "category": "Banner"
+  }]
+}
+{% endschema %}

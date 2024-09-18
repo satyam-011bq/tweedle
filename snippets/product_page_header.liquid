@@ -1,0 +1,50 @@
+<section class="section_page_header preset-{{ preset }}">
+    <div class="backdround-image-inner">
+      <div class="product-page-header__inner {% if settings.type_detail == 'type3' %}container{% else %}nova-container{% endif %}">
+       
+
+        {% if section.settings.enable_breadcrumb == 'yes' %}
+            <div class="pages_breadcrumb text-left">
+              {% include 'breadcrumb' %}
+            </div>
+        {% endif %}
+        <div class="product-navigation">
+          {% if settings.product_prev_next != blank %}
+          <div class="prev-next-products">
+              {% if collection %}
+              {% if collection.previous_product or collection.next_product %}
+              {% if collection.previous_product %}
+              <div class="product-nav product-prev">
+                  <a href="{{ collection.previous_product }}" title="Previous Product">
+                    <svg class="icon-arrow"><use xlink:href="#karic-arrow-left" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg>
+                  </a>
+              </div>
+              {% endif %}
+              {% if collection.next_product %}
+              <div class="product-nav product-next">
+                  <a class="product-next" href="{{ collection.next_product }}" title="Next Product">
+                    <svg class="icon-arrow"><use xlink:href="#karic-arrow-right" xmlns:xlink="http://www.w3.org/1999/xlink"></use></svg>
+                  </a>
+              </div>
+              {% endif %}
+              {% endif %}
+              {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <span class="custom-styles-css">
+      .section_page_header .backdround-image-inner {
+        background-color: {{ background_color }};
+        {% if header_image != 'none' %}
+        background-image: url('{{ header_image }}');
+        background-repeat: no-repeat;
+        background-position: center top; background-size: cover;
+        {% endif %}
+        padding-top:{{top_space}};
+        padding-bottom:{{bottom_space}};
+      }
+    </span>
+</section>

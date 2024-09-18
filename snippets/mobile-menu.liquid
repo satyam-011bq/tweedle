@@ -1,0 +1,309 @@
+<style>
+  .mdp-work-time-box{
+  
+    border-top:1px solid black !important;
+  }
+.btn-secondary:hover {
+  background-color: #e47eda !important;
+}
+.mdp-language-region{
+  margin-top: 20px;
+    border-top: 1px solid;
+}
+  body h3{
+    font-size:18px !important;
+  }
+
+ .btn-secondary {
+   border-radius: 0px;
+    background: none;
+    color: black;
+  }
+  .flex-items{
+    display:flex;
+  }
+.mdp-container {
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+/* Language & Region */
+.mdp-language-region h3 {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.mdp-language-region-content {
+  display: inline-block;
+}
+
+.mdp-language-region-content form {
+  display: inline;
+  margin-right: 20px;
+}
+
+/* Follow Us */
+.mdp-follow-us {
+  margin-top: 20px;
+}
+
+.mdp-follow-us h3 {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.mdp-info-list {
+  display: inline-block;
+}
+
+.mdp-social-link {
+  margin-right: 15px;
+  font-size: 1.5em;
+  
+}
+  .mdp-info-list{
+    display:flex;
+  gap:2px;
+    width:50%;
+  }
+.mdp-info-list a{
+  flex-grow:1;
+}  
+
+.mdp-social-link i {
+  color: black;
+}
+
+/* My Account */
+.mdp-my-account {
+  margin-top: 20px;
+}
+
+.mdp-my-account h3 {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Button styles for Sign Up and Login */
+.mdp-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.mdp-button:hover {
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+}
+
+/* Work Time */
+.mdp-work-time-box {
+  margin-top: 20px;
+}
+
+.mdp-info.md-work-time {
+  font-weight: bold;
+}
+
+.mdp-info i {
+  margin-right: 5px;
+}
+
+/* Ensuring icons appear correctly */
+.mdp-social-link i {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  font-size: 1.5em;
+  color: black;
+}
+
+.mdp-social-link:hover i {
+  color: #555;
+}
+
+</style>
+<div id="navbar-toggle" class="bs-navbar-collapse skip-content">
+
+  {% assign list = linklists[settings.nav_linklist] %} 
+  <ul id="mobile-menu" class="nav-accordion nav-categories">
+    {% for link in list.links %}
+    {% capture menu_label %}menu_item_label_{{ forloop.index }}{% endcapture %} 
+    {% capture menu_label_text1 %}menu_item_label_{{ forloop.index }}_text1{% endcapture %} 
+    {% capture menu_label_text2 %}menu_item_label_{{ forloop.index }}_text2{% endcapture %}
+    {% assign child_list_handle = link.title | handleize %}  
+    {% if linklists[child_list_handle].links != blank %}
+    <li class="level0 level-top parent {% if forloop.index == list.links.size %}last{% endif %}">
+      <a href="{{ link.url }}" class="level-top">
+        <span> 
+          {% if settings.language_enable %}
+          <span class="lang1">{{ link.title | split: '|' | first }}</span>
+          <span class="lang2">{{ link.title | split: '|' | last }}</span>
+          {% else %}
+          {{ link.title | split: '|' | first }}
+          {% endif %}
+          {% if settings[menu_label] !='' and settings[menu_label] == '1' %}
+          <span class="cat-label cat-label-label1 pin-bottom"> 
+            {% if settings.language_enable %}
+            <span class="lang1">{{ settings[menu_label_text1] | split: '|' | first }}</span>
+            <span class="lang2">{{ settings[menu_label_text1] | split: '|' | last }}</span>
+            {% else %}
+            {{ settings[menu_label_text1] | split: '|' | first }}
+            {% endif %}
+          </span>
+          {% endif %}
+          {% if settings[menu_label] !='' and settings[menu_label] == '2' %}
+          <span class="cat-label cat-label-label2 pin-bottom"> 
+            {% if settings.language_enable %}
+            <span class="lang1">{{ settings[menu_label_text2] | split: '|' | first }}</span>
+            <span class="lang2">{{ settings[menu_label_text2] | split: '|' | last }}</span>
+            {% else %}
+            {{ settings[menu_label_text2] | split: '|' | first }}
+            {% endif %}
+          </span>
+          {% endif %}
+        </span>
+      </a>
+      <ul class="level0"> 
+        {% for childlink in linklists[child_list_handle].links %}  
+        {% assign grand_child_list_handle = childlink.title | handle %}
+        {% if linklists[grand_child_list_handle].links != blank %} 
+        <li class="level1 parent {% if forloop.index == linklists[child_list_handle].links.size %}last{% endif %}">
+          <a href="{{ childlink.url }}"><span>{{ childlink.title }}</span></a>
+          <ul class="level1">
+            {% for grand_child_link in linklists[grand_child_list_handle].links %}
+            <li class="level2 {% if forloop.index == linklists[grand_child_list_handle].links.size %}last{% endif %}">
+              <a href="{{ grand_child_link.url }}" class="site-nav__link"> 
+                {% if settings.language_enable %}
+                <span class="lang1">{{ grand_child_link.title | split: '|' | first }}</span>
+                <span class="lang2">{{ grand_child_link.title | split: '|' | last }}</span>
+                {% else %}
+                {{ grand_child_link.title | split: '|' | first }}
+                {% endif %}   
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% else %}
+        <li class="level1 {% if forloop.index == linklists[child_list_handle].links.size %}last{% endif %}">
+          <a href="{{ childlink.url }}">
+            <span> 
+              {% if settings.language_enable %}
+              <span class="lang1">{{ childlink.title | split: '|' | first }}</span>
+              <span class="lang2">{{ childlink.title | split: '|' | last }}</span>
+              {% else %}
+              {{ childlink.title | split: '|' | first }}
+              {% endif %}   
+            </span>
+          </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </li>
+    {% else %}
+    <li class="level0 level-top"> 
+      <a href="{{ link.url }}" class="level-top">
+        <span> 
+          {% if settings.language_enable %}
+          <span class="lang1">{{ link.title | split: '|' | first }}</span>
+          <span class="lang2">{{ link.title | split: '|' | last }}</span>
+          {% else %}
+          {{ link.title | split: '|' | first }}
+          {% endif %} 
+          {% if settings[menu_label] !='' and settings[menu_label] == '1' %}
+          <span class="cat-label cat-label-label1 pin-bottom"> 
+            {% if settings.language_enable %}
+            <span class="lang1">{{ settings[menu_label_text1] | split: '|' | first }}</span>
+            <span class="lang2">{{ settings[menu_label_text1] | split: '|' | last }}</span>
+            {% else %}
+            {{ settings[menu_label_text1] | split: '|' | first }}
+            {% endif %}
+          </span>
+          {% endif %}
+          {% if settings[menu_label] !='' and settings[menu_label] == '2' %}
+          <span class="cat-label cat-label-label2 pin-bottom"> 
+            {% if settings.language_enable %}
+            <span class="lang1">{{ settings[menu_label_text2] | split: '|' | first }}</span>
+            <span class="lang2">{{ settings[menu_label_text2] | split: '|' | last }}</span>
+            {% else %}
+            {{ settings[menu_label_text2] | split: '|' | first }}
+            {% endif %}
+          </span>
+          {% endif %}
+        </span>
+      </a>
+     
+    </li>
+    {% endif %}
+    {% endfor %}
+     <div class="mdp-container">
+  <!-- Language & Region -->
+  <div class="mdp-language-region">
+    <h3 style=margin-top:20px;>LANGUAGE & REGION:</h3>
+    <div class="mdp-language-region-content" style=padding-top:10px;padding-bottom:10px;>
+      <form method="post" action="/localization" class="shopify-localization-form" enctype="multipart/form-data">
+        <select name="country_code">
+          <option value="IN" selected="selected">India (IN) - ₹</option>
+        </select>
+      </form>
+      <form method="post" action="/localization" class="shopify-localization-form" enctype="multipart/form-data">
+        <select name="language_code">
+          <option value="en" selected="selected">English</option>
+        </select>
+      </form>
+    </div>
+  </div>
+
+  <!-- Follow Us -->
+  <div class="mdp-follow-us" style=display:flex;align-items:center;gap:10px;margin-top:20px;>
+    <h3 style=margin:0px;>FOLLOW US:</h3>
+    <div class="mdp-info-list" style=width:35%;>
+    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+   <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+   <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+   <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+
+  <!-- My Account -->
+  <div class="mdp-my-account" style=margin-top:20px;>
+    <h3>MY ACCOUNT:</h3>
+    <div class="flex-items" style=gap:10px;padding-right:10px;padding-top:10px;padding-bottom:10px>
+      
+    <a href="/account/register" style=width:50%>
+    <button style=width:100%;flex-grow:1;background-color:#343434;color:white; type="button" class="btn btn-secondary">SIGN UP</button>
+    </a>
+      
+
+    <a href="/account" style=width:50%>
+      <button style=width:100%;flex-grow:1; type="button" class="btn btn-secondary">LOG IN</button>
+  </a>
+    </div>
+  </div>
+
+  <!-- Opening Time -->
+  <div class="mdp-work-time-box" style=margin-top:20px;border-top:1px solid black;>
+    <div class="mdp-info-list-1" style=padding-top:10px>
+      <div class="mdp-info mdp-work-time">
+        <span><i class="fas fa-clock"></i> Opening time:&nbsp;</span>
+        <span>Mon-Fri 08:00 - 18:00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </ul>
+</div>

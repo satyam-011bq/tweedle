@@ -1,0 +1,43 @@
+
+
+
+<section class="section_page_header preset-{{ preset }}">
+    <div class="backdround-image-inner tset">
+     
+            {% if template == 'article' %}
+                {% if settings.language_enable %}
+                <span style="display:none" class="lang1 test">{{ article.title | split: '|' | first }}</span>
+                <span style="margin:0px" class="lang2">{{ article.title | split: '|' | last }}</span>
+                {% else %}
+                {{ article.title | split: '|' | first }}
+                {% endif %}
+            {% else %}
+                {% include 'title-all' %}
+            {% endif %}
+       
+
+      {% if section.settings.enable_breadcrumb == 'yes' %}
+        {% if section.settings.enable_page_title == 'no' %}
+          <div class="pages_breadcrumb text-left">
+            {% include 'breadcrumb' %}
+        {% else %}
+          <div class="pages_breadcrumb">
+            {% include 'breadcrumb' %}
+        {% endif %}
+          </div>
+      {% endif %}
+    </div>
+    
+    <span class="custom-styles-css">
+      .section_page_header .backdround-image-inner {
+        background-color: {{ background_color }};
+        {% if header_image != 'none' %}
+        background-image: url('{{ header_image }}');
+        background-repeat: no-repeat;
+        background-position: center top; background-size: cover;
+        {% endif %}
+        padding-top:{{top_space}};
+        padding-bottom:{{bottom_space}};
+      }
+    </span>
+</section>

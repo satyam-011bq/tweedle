@@ -1,0 +1,297 @@
+<div data-section-id="{{ section.id }}" class="section__karic-banner-image style_{{ section.settings.preset }}">
+  <div class="container-full">
+    <div class="row m-0 karic-banner-1">
+      {% if section.settings.preset == "1" %}
+      <div class="col-md-6 col-sm-12 p-0">
+        <div class="banner-image-1">
+          <div class="banner--image {% if section.settings.banner_preset == 'style_1' or section.settings.banner_preset == 'style_2' or section.settings.banner_preset == 'style_3' %}spcial-hover-effect{% endif %} incify-lazyload-image banner-background-1" data-background-image="{{ section.settings.image_1_1 | img_url: 'master' }}" data-auto-padding="true"></div>
+        </div>
+
+        <div class="banner-content-1">
+          {% if section.settings.title_1_1 != blank %}
+          <h1 class="text-uppercase">
+            {{ section.settings.title_1_1 }}
+          </h1>
+          {% endif %}
+
+          {% if section.settings.sub_title_1_1 != blank %}
+          <h2>
+            {{ section.settings.sub_title_1_1 }}
+          </h2>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12 p-0">
+        <div class="banner-image-2">
+          <div class="banner--image {% if section.settings.banner_preset == 'style_1' or section.settings.banner_preset == 'style_2' or section.settings.banner_preset == 'style_3' %}spcial-hover-effect{% endif %} incify-lazyload-image banner-background-1" data-background-image="{{ section.settings.image_1_2 | img_url: 'master' }}" data-auto-padding="true"></div>
+        </div>
+
+        <div class="banner-content-2">
+          {% if section.settings.text_1_1 != blank %}
+          <div class="content-1">
+            {{ section.settings.text_1_1 }}
+          </div>
+          {% endif %}
+
+          {% if section.settings.text_1_2 != blank %}
+          <div class="content-2">
+            {{ section.settings.text_1_2 }}
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row m-0 karic-banner-2">
+      <div class="col-md-4 col-sm-12 p-0">
+        <div class="banner-image-1">
+          <img src="{{ section.settings.image_2_1 | img_url: 'master' }}" />
+        </div>
+
+        <div class="banner-content-1">
+          {% if section.settings.text_2_1 != blank %}
+          <div class="content-1">
+            {{ section.settings.text_2_1 }}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-8 col-sm-12 p-0">
+        <div class="banner-image-2">
+          <img src="{{ section.settings.image_2_2 | img_url: 'master' }}" />
+        </div>
+
+        <div class="banner-content-2">
+          {% if section.settings.title_2 != blank %}
+          <h1 class="text-uppercase">
+            {{ section.settings.title_2 }}
+          </h1>
+          {% endif %}
+
+          {% if section.settings.sub_title_2 != blank %}
+          <h2>
+            {{ section.settings.sub_title_2 }}
+          </h2>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row m-0 karic-banner-3">
+      <div class="col-md-12 col-sm-12 p-0">
+        <div class="banner-image-1">
+          <div class="banner--image {% if section.settings.banner_preset == 'style_1' or section.settings.banner_preset == 'style_2' or section.settings.banner_preset == 'style_3' %}spcial-hover-effect{% endif %} incify-lazyload-image banner-background-1" data-background-image="{{ section.settings.image_3 | img_url: 'master' }}" data-auto-padding="true"></div>          
+        </div>
+
+        <div class="banner-content-1">
+          {% if section.settings.title_3 != blank %}
+          <h1 class="text-uppercase">
+            {{ section.settings.title_3 }}
+          </h1>
+          {% endif %}
+
+          {% if section.settings.sub_title_3 != blank %}
+          <h2>
+            {{ section.settings.sub_title_3 }}
+          </h2>
+          {% endif %}
+
+          {% if section.settings.btn_title != blank %}
+          <a href="{{ section.settings.link }}" class="btn-button bordered-black uppercase">
+            {{ section.settings.btn_title }}
+          </a>
+          {% endif %}
+
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+  body div[data-section-id="{{ section.id }}"]{
+    {% if section.settings.enable_style == true %}
+    {% if section.settings.style_top != '' %}
+    margin-top:{{ section.settings.style_top }}px;
+    {% endif %}
+    {% if section.settings.style_bottom != '' %}
+    margin-bottom:{{ section.settings.style_bottom }}px;
+    {% endif %}
+    {% if section.settings.style_left != '' %}
+    margin-left:{{ section.settings.style_left }}px;
+    {% endif %}
+    {% if section.settings.style_right != '' %}
+    margin-right:{{ section.settings.style_right }}px;
+    {% endif %}
+    {% endif %}
+  }
+</span>
+{% schema %}
+{
+"name": "Karic Banner Image",
+"settings": [
+    {
+    "type": "header",
+    "content": "Banner Preset Settings"
+    },
+    {
+      "type": "select",
+      "id": "preset",
+      "label": "Preset",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style 1"
+        },
+        {
+          "value": "2",
+          "label": "Style 2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1_2",
+      "label": "Image 1"
+    },
+    {
+      "type": "text",
+      "id": "title_1_1",
+      "label": "Title 1"
+    },
+    {
+      "type": "text",
+      "id": "sub_title_1_1",
+      "label": "Sub Title 1"
+    },
+    {
+      "type": "textarea",
+      "id": "text_1_1",
+      "label": "Content 1"
+    },
+    {
+      "type": "text",
+      "id": "text_1_2",
+      "label": "Content 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2_1",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title 2"
+    },
+    {
+      "type": "text",
+      "id": "sub_title_2",
+      "label": "Sub Title 2"
+    },
+    {
+      "type": "text",
+      "id": "text_2_1",
+      "label": "Content 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Title 3"
+    },
+    {
+      "type": "text",
+      "id": "sub_title_3",
+      "label": "Sub Title 3"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_title",
+      "label": "Button Title"
+    },
+    {
+      "type": "header",
+      "content": "Styles Settings"
+    },
+    {
+     "type": "checkbox",
+     "id": "enable_style",
+     "default": false,
+     "label": "Enable Style Settings"
+    },
+    {
+        "type":      "range",
+        "id":        "style_top",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Top",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_bottom",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Bottom",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_left",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Left",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_right",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Right",
+        "default":   0
+    }
+	],
+	"presets": [{
+      "name": "Karic Banner Image",
+      "category": "Banner Image"
+  	}]
+}
+{% endschema %}

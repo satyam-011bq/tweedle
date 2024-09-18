@@ -1,0 +1,26 @@
+{% if collection.image %}
+  {%- assign collection_image = collection.image -%}
+{% elsif collection.products.first and collection.products.first.images != empty %}
+  {%- assign collection_image = collection.products.first.featured_image -%}
+{% else %}
+  {% assign collection_image = blank %}
+{% endif %}
+<div class="collection-list__item">
+  <div class="box-inner">
+    {% if collection == empty %}
+       <div class="banner--image placeholder-svg">
+         {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+         <div class="banner--image incify-lazyload-image" data-background-image="{{ collection_image | img_url: 'master' }}" data-auto-padding="true"></div>
+       </div>
+     {% else %}
+        <div class="banner--image incify-lazyload-image" data-background-image="{{ collection_image | img_url: 'master' }}" data-auto-padding="true"></div>
+     {% endif %}
+      {% if collection.title != blank %}
+      <div class="banner-infor">
+          <h3>{{ collection.title }}</h3>
+          <a href="{% if collection.url == blank %}#{% else %}{{ collection.url }}{% endif %}" class="link-banner">{{ block.settings.banner_button }}</a>
+      </div>
+      {% endif %}
+      <a class="link-shop-overlay" href="{% if collection.url == blank %}#{% else %}{{ collection.url }}{% endif %}"></a>
+  </div>
+</div>

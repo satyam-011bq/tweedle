@@ -1,0 +1,127 @@
+{% case section.settings.logo_width %}
+{% when '' %}
+{%- assign image_logo_width = '' -%}
+{%- assign image_logo_height = '' -%}
+{% else %}
+{%- assign image_logo_width = section.settings.logo_width -%}
+{%- assign image_logo_height = '' -%}
+{% endcase %}
+{% capture image_logo_size %}{{ image_logo_width }}x{{ image_logo_height }}{% endcapture %}
+{% if section.settings.logo_use_image %}
+    {% if section.settings.logo != blank %}
+        {% assign logo = section.settings.logo | img_url: image_logo_size %}
+    {% else %}
+        {% assign logo = 'logo.png' | asset_url %}
+    {% endif %}
+{% endif %}
+
+{% if section.settings.logo_white_use_image %}
+{% if section.settings.logo_white != blank %}
+{% assign logo_white = section.settings.logo_white | img_url: image_logo_size %}
+{% else %}
+{% assign logo_white = 'logo-light.png' | asset_url %}
+{% endif %}
+{% endif %}
+{% assign ishomepage = template | replace: '.', ' ' | truncatewords: 2, '' | handle  %}
+<style>
+  .icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-text {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%; /* Position below the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666; /* Light theme font color */
+    font-size: 12px; /* Increase font size */
+    font-weight: 400; /* Normal text weight */
+    white-space: nowrap;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.icon-container:hover .icon-text {
+    visibility: visible;
+    opacity: 1;
+}
+.header-wrapper-inner{
+display: flex;
+}
+  </style>
+<div class="header-container style1 header__layout-{{section.settings.type}}{% if section.settings.header_border == 'yes' and ishomepage == 'index' %} header-border{% endif %} clearfix">
+    <div class="header">
+        <div class="header-wrapper">
+          <div class="header-wrapper-inner clearfix">
+            <div class="test header-left-area">
+                <div class="logo-header">
+                    {% if section.settings.logo_use_image %}
+                    <a href="/" class="logo">
+                        <img class="x1" src="{{ logo }}" alt="{{ shop.name }}" />
+                    </a>
+                    {% endif %}
+                    {% if section.settings.logo_white_use_image %}
+                    <a href="/" class="logo-white-specail">
+                        <img class="x1" src="{{ logo_white }}" alt="{{ shop.name }}" />
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="menu-icon">
+                    <a href="javascript:;">
+                        <svg class="dlicon-menu2" width="100%" height="100%"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dlicon-menu2"></use></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="header-middle-area d-none d-xl-block d-lg-block menu-uppercase-bold">
+                <!-- Main Menu -->
+                {% include 'main-menu' %}
+                <!-- End Main Menu -->
+            </div>
+
+            <div class="header-right-area flex-row d-none d-xl-block d-lg-block">
+  <div class="d-flex">
+    
+    <!-- Wishlist Icon -->
+    <div class="p-3 flex-fill align-self-center icon-container">
+      <a rel="nofollow" class="component-target" href="https://tweedleapp.myshopify.com/pages/wishlist">
+        <i class="dl-icon-heart2"></i>
+        <span class="icon-text">Favorite</span>
+      </a>
+    </div>
+    
+    <!-- Account Icon -->
+    <div class="p-3 flex-fill align-self-center icon-container">
+      <a href="/account">
+        <svg class="karic-header-users">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#karic-header-users"></use>
+        </svg>
+        <span class="icon-text">Account</span>
+      </a>
+    </div>
+    
+    <!-- Search Icon -->
+    <div class="p-3 flex-fill align-self-center icon-container">
+      <a href="javascript:void(0);" class="js-search--btn">
+        <svg class="karic-search-icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#karic-search-icon"></use>
+        </svg>
+        <span class="icon-text">Search</span>
+      </a>
+    </div>
+    
+    <!-- Cart Icon -->
+    <div class="pl-3 flex-fill align-self-center mini-cart icon-container" style="width:48px;">
+      {% include 'header-cart' %}
+      <span class="icon-text">Cart</span>
+    </div>
+    
+  </div>
+</div>
+
+          </div>
+        </div>
+    </div>
+</div>

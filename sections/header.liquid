@@ -1,0 +1,237 @@
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <header class="main-section-header {% if section.settings.enable_header_transparent == 'yes' and template == 'index' or template.suffix == 'landingpage'  %}header-transparent-enable{%endif%} header--preset_{{section.settings.header_preset}}">
+    {% if section.settings.type == 'style1' %} {% include 'header_style_1' %} {% endif %} {% if section.settings.type == 'style2' %} {% include 'header_style_2' %} {% endif %} {% if section.settings.type == 'style3' %} {% include 'header_style_3' %} {% endif
+    %} {% if section.settings.type == 'style4' %} {% include 'header_style_4' %} {% endif %} {% if section.settings.type == 'style5' %} {% include 'header_style_5' %} {% endif %} {% if section.settings.type == 'style6' %} {% include 'header_style_6' %}
+    {% endif %} {% if section.settings.type == 'style7' %} {% include 'header_style_7' %} {% endif %} {% if section.settings.sticky_header_enable == 'enable'%}
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var scrolled = false;
+        var heiheader = $('.header-container').innerHeight();
+        var heisub = heiheader - 80;
+        var heisub1 = heiheader - 60;
+        $(window).scroll(function() {
+          if (heiheader < $(window).scrollTop() && !scrolled) {
+            $('.header-container').addClass('sticky-header');
+            scrolled = true;
+          }
+          if ($('.header-container').hasClass('type4')) {
+            if (heisub1 > $(window).scrollTop() && scrolled) {
+              $('.header-container').removeClass('sticky-header');
+              $('.header-container .main-nav').removeClass('container');
+              scrolled = false;
+            }
+          } else {
+            if (heisub > $(window).scrollTop() && scrolled) {
+              $('.header-container').removeClass('sticky-header');
+              scrolled = false;
+            }
+          }
+        })
+      });
+    </script>
+    {% endif %}
+    <div class="mobile-nav">
+      {% include 'mobile-menu' %}
+    </div>
+    <div class="mobile-nav-overlay"></div>
+  </header>
+</div>
+{% schema %} {
+  "name": "Header",
+  "settings": [
+    {
+      "type": "select",
+      "id": "type",
+      "label": "Header Type",
+      "info": "choose header type",
+      "options": [
+        {
+          "value": "style1",
+          "label": "Header Style 1"
+        },
+        {
+          "value": "style2",
+          "label": "Header Style 2"
+        },
+        {
+          "value": "style3",
+          "label": "Header Style 3"
+        },
+        {
+          "value": "style4",
+          "label": "Header Style 4"
+        }
+      ],
+      "default": "style1"
+    },
+    {
+      "type": "select",
+      "id": "language_flag",
+      "label": "Show Flags in Language Switcher",
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ],
+      "default": "yes"
+    },
+    {
+      "type": "select",
+      "id": "enable_header_transparent",
+      "label": "Enable Header Transparent",
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ],
+      "default": "yes"
+    },
+    {
+      "type": "select",
+      "id": "header_preset",
+      "label": "Header Preset",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "select",
+      "id": "header_border",
+      "label": "Header Border",
+      "options": [
+        {
+          "value": "no",
+          "label": "None"
+        },
+        {
+          "value": "yes",
+          "label": "Bottom Border"
+        }
+      ],
+      "default": "no"
+    },
+    {
+      "type": "header",
+      "content": "Header Style 2"
+    },
+    {
+      "type": "textarea",
+      "id": "header_2_left_text",
+      "label": "Left Text"
+    },
+    {
+      "type": "header",
+      "content": "Header Style 3"
+    },
+    {
+      "type": "color",
+      "id": "header_3_background_color",
+      "label": "Background Color",
+      "default": "#f1f1f1"
+    },
+    {
+      "type": "checkbox",
+      "id": "style_3_enable_social",
+      "label": "Enable Social Share"
+    },
+    {
+      "type": "textarea",
+      "id": "style_3_social_share",
+      "label": "Social Share Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "style_3_enable_map",
+      "label": "Enable\nMap"
+    },
+    {
+      "type": "textarea",
+      "id": "style_3_copyright_text",
+      "label": "Copyright Text"
+    },
+    {
+      "type": "header",
+      "content": "Header Aside Config"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_block_header_aside_top",
+      "label": "Custom Block Top"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_block_header_aside_bottom",
+      "label": "Custom Block Bottom"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_use_image",
+      "label": "Use Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_width",
+      "label": "Logo Width"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Maximum logo dimensions are 400px wide by 100px high. The uploaded file will be resized to fit within those constraints."
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_white_use_image",
+      "label": "Use Logo White"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_white",
+      "label": "Logo White",
+      "info": "Maximum logo dimensions are 400px wide by 100px high. The uploaded file will be resized to fit within those constraints."
+    },
+    {
+      "type": "header",
+      "content": "Header Sticky"
+    },
+    {
+      "type": "select",
+      "id": "sticky_header_enable",
+      "label": "Enable sticky header",
+      "options": [
+        {
+          "value": "enable",
+          "label": "Enable"
+        },
+        {
+          "value": "disable",
+          "label": "Disable"
+        }
+      ],
+      "default": "enable"
+    }
+  ]
+}
+{% endschema %}

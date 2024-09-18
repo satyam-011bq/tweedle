@@ -1,0 +1,195 @@
+<div data-section-id="{{ section.id }}" class="section__home-banner-image-2 style_3 lg-mt-70 md-mt-50 sm-mt-30 xs-mt-20">
+  <div class="home-banner-image-2">
+    <div class="nova-container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12 sm-mb-30 xs-mb-15">
+          <div class="box-inner">
+            <div class="banner--image {% if section.settings.banner_preset == 'style_1' or section.settings.banner_preset == 'style_2' or section.settings.banner_preset == 'style_3' %}spcial-hover-effect{% endif %} incify-lazyload-image banner-background-1" data-background-image="{{ section.settings.image_1 | img_url: 'master' }}" data-auto-padding="true"></div>
+            <div class="banner-content text-right">
+              {% if section.settings.title_1 != blank %}
+              <h2 class="title-font">{{ section.settings.title_1 }}</h2>
+              {% endif %}
+
+              {% if section.settings.sup_title_1 != blank %}
+              <p>{{ section.settings.sup_title_1 }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 sm-mb-30 xs-mb-15">
+          <div class="box-inner box-inner-2">
+            <div class="banner--image {% if section.settings.banner_preset == 'style_1' or section.settings.banner_preset == 'style_2' or section.settings.banner_preset == 'style_3' %}spcial-hover-effect{% endif %} incify-lazyload-image banner-background-1" data-background-image="{{ section.settings.image_2 | img_url: 'master' }}" data-auto-padding="true"></div>
+            <div class="banner-content text-left">
+                {% if section.settings.title_2 != blank %}
+                <h2 class="title-font">{{ section.settings.title_2 }}</h2>
+                {% endif %}
+
+                {% if section.settings.sup_title_2 != blank %}
+                <p>{{ section.settings.sup_title_2 }}</p>
+                {% endif %}
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-3 col-sm-12 sm-mb-30 xs-mb-15">
+          <div class="box-inner box-inner-3">
+            <div class="banner--image {% if section.settings.banner_preset == 'style_1' or section.settings.banner_preset == 'style_2' or section.settings.banner_preset == 'style_3' %}spcial-hover-effect{% endif %} incify-lazyload-image banner-background-1" data-background-image="{{ section.settings.image_3 | img_url: 'master' }}" data-auto-padding="true"></div>
+            <div class="banner-content text-right">
+                {% if section.settings.title_3 != blank %}
+                <h2 class="title-font">{{ section.settings.title_3 }}</h2>
+                {% endif %}
+
+                <div class="banner-text">
+                  {% if section.settings.sup_title_3 != blank %}
+                  <p class="text-1">{{ section.settings.sup_title_3 }}</p>
+                  {% endif %}
+
+                  {% if section.settings.sup_title_4 != blank %}
+                  <p class="text-2">{{ section.settings.sup_title_4 }}</p>
+                  {% endif %}
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<span class="custom-styles-css">
+  body div[data-section-id="{{ section.id }}"]{
+    {% if section.settings.enable_style == true %}
+    {% if section.settings.style_top != '' %}
+    margin-top:{{ section.settings.style_top }}px;
+    {% endif %}
+    {% if section.settings.style_bottom != '' %}
+    margin-bottom:{{ section.settings.style_bottom }}px;
+    {% endif %}
+    {% if section.settings.style_left != '' %}
+    margin-left:{{ section.settings.style_left }}px;
+    {% endif %}
+    {% if section.settings.style_right != '' %}
+    margin-right:{{ section.settings.style_right }}px;
+    {% endif %}
+    {% endif %}
+  }
+</span>
+{% schema %}
+{
+"name": "Banner Image Category",
+"settings": [
+    {
+    "type": "header",
+    "content": "Banner Preset Settings"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Title 01"
+    },
+    {
+      "type": "text",
+      "id": "sup_title_1",
+      "label": "Sub Title 01"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 01"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title 02"
+    },
+    {
+      "type": "text",
+      "id": "sup_title_2",
+      "label": "Sub Title 02"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 02"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Title 03"
+    },
+    {
+      "type": "text",
+      "id": "sup_title_3",
+      "label": "Sub Title 03"
+    },
+    {
+      "type": "text",
+      "id": "sup_title_4",
+      "label": "Sub Title 04"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 03"
+    },
+    {
+      "type": "header",
+      "content": "Styles Settings"
+    },
+    {
+     "type": "checkbox",
+     "id": "enable_style",
+     "default": false,
+     "label": "Enable Style Settings"
+    },
+    {
+        "type":      "range",
+        "id":        "style_top",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Top",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_bottom",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Bottom",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_left",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Left",
+        "default":   0
+    },
+    {
+        "type":      "range",
+        "id":        "style_right",
+        "min":       0,
+        "max":        500,
+        "step":       5,
+        "unit":       "px",
+        "label":     "Space Right",
+        "default":   0
+    }
+	],
+	"presets": [{
+      "name": "Banner Image Category",
+      "category": "Banner Image"
+  	}]
+}
+{% endschema %}

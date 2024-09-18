@@ -1,0 +1,22 @@
+<div class="item cell" {{ block.shopify_attributes }}>
+  <div class="nova-lookbook-item">
+    {% if block.settings.image != blank %}
+    <img src="{{ block.settings.image | img_url: 'master' }}" />
+    {% else %}
+    {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+    {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+    {% if block.settings.p1_product != blank %}
+    {% include "lookbook-item-slider-1" %}
+    {% endif %}
+    {% if block.settings.p2_product != blank %}
+    {% include "lookbook-item-slider-2" %}
+    {% endif %}
+    {% if block.settings.p3_product != blank %}
+    {% include "lookbook-item-slider-3" %}
+    {% endif %}
+    {% if block.settings.p4_product != blank %}
+    {% include "lookbook-item-slider-4" %}
+    {% endif %}
+  </div>
+</div>

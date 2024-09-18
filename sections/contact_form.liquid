@@ -1,0 +1,178 @@
+<section class="form-contact-page">
+    <div class="container">
+        <div class="nova-row">
+          <div class="contact-form-top">
+              {% if section.settings.contact_form_title != blank %}
+              <div class="title-form-contact">
+                  <h3>{{ section.settings.contact_form_title }}</h3>
+              </div>
+              {% endif %}
+              {% if section.settings.contact_form_sub_title != blank %}
+              <div class="line-contact1"></div>
+              <div class="sub-title-contact">
+                  <p>{{ section.settings.contact_form_sub_title }}</p>
+              </div>
+              {% endif %}
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 contact-left-text">
+              <div class="contact-left-text-inner">
+                {% if section.settings.contact_left_text != blank %}
+                <h5>{{ section.settings.contact_left_text }}</h5>
+                {% endif %}
+                <div class="la-contact-info">
+                  {% if section.settings.contact_addresss != blank %}
+                  <div class="la-contact-item">
+                    <svg>
+                     <use xlink:href="#karic-contact_pin" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                    </svg>
+                    {{section.settings.contact_addresss}}
+                  </div>
+                  {% endif %}
+                  {% if section.settings.contact_email != blank %}
+                  <div class="la-contact-item">
+                    <svg>
+                     <use xlink:href="#karic-contact_email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                    </svg>
+                    {{section.settings.contact_email}}
+                  </div>
+                  {% endif %}
+                  {% if section.settings.contact_phone != blank %}
+                  <div class="la-contact-item">
+                    <svg>
+                     <use xlink:href="#karic-contact_phone" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                    </svg>
+                    {{section.settings.contact_phone}}
+                  </div>
+                  {% endif %}
+                  {% if section.settings.contact_work_time != blank %}
+                  <div class="la-contact-item">
+                    <svg class="work-time">
+                     <use xlink:href="#karic-contact_time" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                    </svg>
+                    {{section.settings.contact_work_time}}
+                  </div>
+                  {% endif %}
+                </div>
+                {% if section.settings.contact_socials_link != blank %}
+                <div class="social-media-link style-square no-bg">
+                  {{section.settings.contact_socials_link}}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="contact-infor-form">
+                    <div class="form-vertical">
+                        {% form 'contact' %}
+                        {% if form.posted_successfully? %}
+                        <p class="note form-success" {% if settings.language_enable %}data-translate="contact.form.post_success"{% endif %}>
+                            {{ 'contact.form.post_success' | t }}
+                        </p>
+                        {% endif %}
+                        {{ form.errors | default_errors }}
+                        {% assign name_attr = 'contact.form.name' | t | handle %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <ul class="form-list">
+                                    <li>
+                                        <input type="text" placeholder="{{ 'contact.form.name' | t }}" id="ContactFormName" class="input-full" name="contact[{{ name_attr }}]" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12">
+                                <ul class="form-list">
+                                    <li>
+                                        <!--                                    <label for="name" class="required">{{ 'contact.form.email' | t }}<em>*</em></label>-->
+                                        <input type="email" placeholder="{{ 'contact.form.email' | t }}" id="ContactFormEmail" class="input-full" name="contact[email]" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-12">
+                                <ul class="form-list">
+                                    <li>
+                                        <input type="text" placeholder="{{ 'contact.form.phone' | t }}" id="ContactFormPhone" class="input-full" name="contact[phone]" autocorrect="off" autocapitalize="off" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-12">
+                                <ul class="form-list">
+                                    <li>
+                                        <!--                                    <label for="name" class="required">{{ 'contact.form.comment' | t }}<em>*</em></label>-->
+                                        <textarea rows="5" cols="5" id="ContactFormMessage" class="input-full" name="contact[body]" placeholder="{{ 'contact.form.comment' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-12 btn-submit-contact">
+                                <input type="submit" class="nova-button btn-lg rounded uppercase shadow-hover" {% if settings.language_enable %}data-translate="contact.form.send"{% endif %} value="{{ 'contact.form.send' | t }}">
+                            </div>
+                        </div>
+                        {% endform %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% schema %}
+{
+"name": "Contact Form",
+"settings": [
+    {
+    "type": "header",
+    "content": "Contact Form"
+    },
+    {
+    "type": "text",
+    "id": "contact_form_title",
+    "label": "Form Title"
+    },
+    {
+    "type": "text",
+    "id": "contact_form_sub_title",
+    "label": "Form Sub Title"
+    },
+    {
+    "type": "text",
+    "id": "contact_left_text",
+    "label": "Left Title"
+    },
+    {
+    "type": "text",
+    "id": "contact_addresss",
+    "label": "Contact Address"
+    },
+    {
+    "type": "text",
+    "id": "contact_phone",
+    "label": "Contact Phone"
+    },
+    {
+    "type": "text",
+    "id": "contact_email",
+    "label": "Contact Email"
+    },
+    {
+    "type": "text",
+    "id": "contact_work_time",
+    "label": "Working Time"
+    },
+    {
+    "type": "textarea",
+    "id": "contact_socials_link",
+    "label": "Contact Social"
+    }
+	],
+	"presets": [{
+      "name": "Contact Form",
+      "category": "Contact Page"
+  	}]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

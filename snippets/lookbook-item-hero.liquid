@@ -1,0 +1,42 @@
+<div class="item" {{ block.shopify_attributes }}>
+  <div class="home-lookbook-hero-item d-flex clearfix" data-sticky_parent>
+    <div class="hero-look__left-content">
+      <div class="hero-look__content" data-sticky_column>
+        <div class="hero-look__content--inner">
+          <h3>{{block.settings.sub_title}}</h3>
+          <h1>{{block.settings.title}}</h1>
+          <div class="hero-look__content--button">
+            {% if block.settings.button_1 != blank %}
+            <a href="{% if block.settings.button_1_url != blank %}{{ block.settings.button_1_url }}{% else %}#{% endif %}" class="nova-button primary rounded uppercase">{{ block.settings.button_1 }}</a>
+            {% endif %}
+            {% if block.settings.button_2 != blank %}
+            <a href="{% if block.settings.button_2_url != blank %}{{ block.settings.button_2_url }}{% else %}#{% endif %}" class="nova-button bordered rounded uppercase">{{ block.settings.button_2 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-look__right-content">
+      <div class="hero-look__image">
+        {% if block.settings.image != blank %}
+        <img src="{{ block.settings.image | img_url: 'master' }}" />
+        {% else %}
+        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+        {% if block.settings.p1_product != blank %}
+        {% include "lookbook-item-slider-1" %}
+        {% endif %}
+        {% if block.settings.p2_product != blank %}
+        {% include "lookbook-item-slider-2" %}
+        {% endif %}
+        {% if block.settings.p3_product != blank %}
+        {% include "lookbook-item-slider-3" %}
+        {% endif %}
+        {% if block.settings.p4_product != blank %}
+        {% include "lookbook-item-slider-4" %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

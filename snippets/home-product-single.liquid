@@ -1,0 +1,124 @@
+<div class="home-product-single__images">
+      <a href="{{ product.url }}"><img src="{{ product.featured_image.src | img_url: section.settings.image_size }}" /></a>
+</div>
+<div class="home-product-single__summary">
+  <h3>{{ product.title }}</h3>
+  <div class="review-product-details">
+      <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+  </div>
+  <div class="price-box">
+    <div class="price">
+      {% if on_sale %}
+      {% if product.price_varies %}
+      {% assign sale_price_1 = product.price | money %}
+      <span class="money">
+        {{ 'products.product.on_sale_from_html' | t: price: sale_price_1 }}
+      </span>
+      {% else %}
+      <div class="special-price">
+        <span class="money">{{ product.price | money }}</span>
+      </div>
+      {% endif %}
+      {% else %}
+      {% if product.price_varies %}
+      {% assign price_1 = product.price | money %}
+      <span class="money">{{ 'products.general.from_text_html' | t: price: price_1 }}</span>
+      {% else %}
+      <span class="money">
+        {{ product.price | money }}
+      </span>
+      {% endif %}
+      {% endif %}
+      {% if sold_out %}
+      <span class="money">{{ 'products.product.sold_out' | t }}</span>
+      {% endif %}
+      {% if on_sale %}
+      <div class="compare-price">
+        <span class="money">{{ product.compare_at_price | money }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if settings.product_short_desc %}
+    <div class="short-description">
+      {% if settings.product_short_desc == '1' %}
+        {% if product.description contains '[countdown]' %}
+           {% assign des = product.description | split:'[countdown]' | first %}
+           {{ des | strip_html | truncatewords: 30 }}
+        {% else %}
+           {{ product.content | truncatewords: 30 }}
+        {% endif %}
+      {% endif %}
+      {%if settings.product_short_desc == '2'%}
+        {% if product.description contains '[countdown]' %}
+           {% assign des = product.description | split:'[countdown]' | first %}
+           {{ des }}
+        {% else %}
+          {{ product.description }}
+        {% endif %}
+      {% endif %}
+    </div>
+  {% endif %}
+  <div class="product-type-main">
+      <form class="product-form" id="product-form" action="/cart/add" method="post" enctype="multipart/form-data" data-product-id="{{product.id}}" data-id="{{ product.handle }}">
+        <div class="select clearfix"style="display:none">
+          <select id="product-select" name="id">
+            {% for variant in product.variants %}
+            <option value="{{ variant.id }}"{% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %}>{{ variant.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+          {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+          <div id="product-variants" class="product-options" {% if product.options.size == 1 and product.options.first == 'Title' %}style="display: none;"{% endif %}>
+            <select id="product-select" name="id" style="display: none;">
+                {% for variant in product.variants %}
+                {% if variant.available %}
+                <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                {% else %}
+                <option disabled="disabled">
+                    {{ variant.title }} - {{'products.product.sold_out' | t}}
+                </option>
+                {% endif %}
+                {% endfor %}
+            </select>
+          </div>
+        {% endunless %}
+        <div class="product-options-bottom">
+            <div class="add-to-cart-box">
+                <div class="input-box pull-left">
+                    <input type="text" id="qty" name="quantity" value="1" min="1" class="quantity-selector">
+                    <div class="plus-minus">
+                        <div class="increase items" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;">
+                            <i class="zyra-icon icon-ui-1-simple-add"></i>
+                        </div>
+                        <div class="reduced items" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) result.value--;return false;">
+                            <i class="zyra-icon icon-ui-1-simple-delete"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <div class="action-list addtocart">
+                        <div class="button-wrapper">
+                            {% if product.available %}
+                            <div class="button-wrapper-content">
+                                <button type="submit" name="add" class="nova-button rounded uppercase shadow-hover add-to-cart">
+                                  {{ 'products.product.add_to_cart' | t }}
+                                </button>
+                            </div>
+                            {% else %}
+                            <div class="button-wrapper-content">
+                                <button href="javascript:;" class="nova-button rounded uppercase shadow-hover add-to-cart">
+                                  <span>
+                                    <span {% if settings.language_enable %}data-translate="products.product.sold_out"{% endif %}>{{ 'products.product.sold_out' | t }}</span>
+                                  </span>
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </form>
+    </div>
+</div>

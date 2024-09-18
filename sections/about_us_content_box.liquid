@@ -1,0 +1,67 @@
+{% if section.settings.enable == true %}
+<div data-section-id="{{ section.id }}" class="section__about-us-content-box lg-mt-55 xs-mt-30">
+  <div class="container">
+    <div class="aboutus__content-box row">
+      <div class="col-md-6">
+        <div class="aboutus__content-box--content lg-mt-70 md-mt-50 xs-mt-30">
+          <h1>{{ section.settings.content_title }}</h1>
+          <h2 class="special-font">{{ section.settings.content_sub_title }}</h2>
+          <p>
+            {{ section.settings.content_text }}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | img_url: 'master' }}" />
+        {% else %}
+          {{ 'image' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{
+  "name": "Content Box",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Box Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable Content Box",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Box Image"
+    },
+    {
+      "type": "text",
+      "id": "content_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "content_sub_title",
+      "label": "Sub Title"
+    },
+    {
+      "type": "textarea",
+      "id": "content_text",
+      "label": "Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Box",
+      "category": "About Us V1"
+    }
+  ]
+}
+{% endschema %}

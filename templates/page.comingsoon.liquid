@@ -1,0 +1,61 @@
+<!-- /templates/page.liquid -->
+{% if section.settings.logo != blank %}
+    {% assign logo = section.settings.logo | img_url: 'master' %}
+{% else %}
+    {% assign logo = 'logo.png' | asset_url %}
+{% endif %}
+<div class="coming-soon-page">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 comingsoon-image">
+        <img src="{{ 'coming-soon-bg.jpg' | asset_url }}" />
+      </div>
+      <div class="col-md-6 col-sm-12 comingsoon-content">
+        <a href="#password-form" data-rel="lightcase" class="nova-button bordered uppercase enter_password_btn">{{ 'general.comingsoon.enter_password' | t }}</a>
+        <div id="password-form" class="password-form" style="display: none;">
+          {% form 'storefront_password' %}
+          {{ form.errors | default_errors }}
+            <div class="form-group">
+              <input class="form-control" placeholder="Enter store using password:" type="password" name="password">
+            </div>
+            <div class="form-group">
+              <input class="nova-button primary uppercase full-width" type="submit" value="Enter">
+            </div>
+          {% endform %}
+        </div>
+        <div class="text-coming-soon">
+          <a href="/" class="logo">
+              <img class="x1" src="{{ 'logo_comingsoon.png' | asset_url }}" alt="{{ shop.name }}" />
+          </a>
+            <h2>{% if settings.coming_title != blank %}{{settings.coming_title}}{% endif %}</h2>
+        </div>
+        <div id="countdown">
+          <div class="item">
+              <p class="days">00</p>
+              <p class="timeRefDays">Days</p>
+          </div>
+          <div class="item">
+              <p class="hours">00</p>
+              <p class="timeRefHours">Hrs</p>
+          </div>
+          <div class="item">
+              <p class="minutes">00</p>
+              <p class="timeRefMinutes">Mins</p>
+          </div>
+          <div class="item">
+              <p class="seconds">00</p>
+              <p class="timeRefSeconds">Secs</p>
+          </div>
+        </div>
+        <script>
+        $('#countdown').countdown('{% if settings.target_count_down_coming != blank %}{{settings.target_count_down_coming}}{% endif %} 00:00:00', function(event) {
+          var $this = $(this).html(event.strftime(''
+            + '<div class="item"><p class="days">%-D</p><p class="timeRefDays">Days</p></div>'
+            + '<div class="item"><p class="hours">%H</p><p class="timeRefHours">Hrs</p></div>'
+            + '<div class="item"><p class="minutes">%M</p><p class="timeRefMinutes">Mins</p></div>'
+            + '<div class="item"><p class="seconds">%S</p><p class="timeRefSeconds">Secs</p></div>'));
+        });
+        </script>
+        {% include 'comming_subscribe' %}
+      </div>
+    </div>
+</div>

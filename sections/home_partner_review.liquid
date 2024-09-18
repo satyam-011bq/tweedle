@@ -1,0 +1,139 @@
+<div data-section-id="{{ section.id }}" class="section__partner-review-content mt-lg-6 mt-md-4 mt-xs-3">
+  <div class="partner-review">
+    <div class="row">
+      <div class="nova-partner col-md-6 col-sm-12">
+        <div class="partner-content">
+          <h2>{{ section.settings.partner_title }}</h2>
+          <div class="grid-x grid-padding-x small-up-1 medium-up-3 large-up-3">
+            {% assign block_id = 0 %}
+            {% for block in section.blocks limit: section.blocks.size %}
+              {% if block.type == 'partner_item' %}
+                {% assign block_id = block_id | plus: 1 %}
+                <div class="cell">
+                  <div class="partner-id-{{ block_id }}">
+                    <a href="{{ block.settings.partner_url }}">
+                      {% if block.settings.partner_image != blank %}
+                          <img src="{{ block.settings.partner_image | img_url: 'master' }}" />
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag }}
+                      {% endif %}
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="nova-reviews col-md-6 col-sm-12">
+        <div class="reviews-content">
+          <h2>{{ section.settings.reviews_title }}</h2>
+          <div class="slick-carousel full-width-slide products-grid" data-slick='{"slidesToShow":1,"slidesToScroll":1,"dots":true,"autoplaySpeed":5000,"speed":300,"infinite":true,"arrows":false,"swipe":true,"draggable":true,"touchMove":true,"pauseOnHover":false,"centerMode":true,"centerPadding":"10%","pauseOnDotsHover":true}'>
+            {% for block in section.blocks limit: section.blocks.size %}
+              {% if block.type == 'reviews_item' %}
+                  <div class="reviews-item">
+                    <div class="testimonial_item--inner item-inner">
+                        <div class="testimonial_item--image">
+                          {% if block.settings.testimonial_avt != blank %}
+                            <span style="background-image: url({{ block.settings.testimonial_avt | img_url: 'master' }});"></span>
+                          {% else %}
+                            {{ 'image' | placeholder_svg_tag }}
+                          {% endif %}
+                        </div>
+                        <div class="testimonial_item--info">
+                            {% if block.settings.testimonial_text != blank %}
+                            <div class="testimonial_item--excerpt">{{ block.settings.testimonial_text }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="testimonial_item--bottom">
+                            <div class="testimonial_item--title-role">
+                                {% if block.settings.testimonial_text_author != blank %}
+                                <div class="testimonial_item--title">{{ block.settings.testimonial_text_author }}</div>
+                                {% endif %}
+                                {% if block.settings.testimonial_text_job != blank %}
+                                <p class="testimonial_item--role">{{ block.settings.testimonial_text_job }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Partner Review",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Box Settings"
+    },
+    {
+      "type": "text",
+      "id": "partner_title",
+      "label": "Partner Title"
+    },
+    {
+      "type": "text",
+      "id": "reviews_title",
+      "label": "Review Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "partner_item",
+      "name": "Partner Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "partner_image",
+          "label": "Partner Image"
+        },
+        {
+          "type": "url",
+          "id": "partner_url",
+          "label": "Partner url"
+        }
+      ]
+    },
+    {
+      "type": "reviews_item",
+      "name": "Reviews Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "testimonial_avt",
+          "label": "Avatar"
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial_text",
+          "label": "Testimonial Text"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_text_author",
+          "label": "Name Author"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_text_job",
+          "label": "Name Job"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parner Review",
+      "category": "Home Page"
+    }
+  ]
+}
+{% endschema %}

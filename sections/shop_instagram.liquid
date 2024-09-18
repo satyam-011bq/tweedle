@@ -1,0 +1,23 @@
+<section class="grid-item-instagram lg-mt-90 md-mt-60 xs-mt-30 lg-mb-90 md-mb-60 xs-mb-30">
+  <div class="nova-container">
+    <script async src='{% if section.settings.embed_link_instargram_snapppt != blank %}{{section.settings.embed_link_instargram_snapppt}}{% endif %}' class='snapppt-widget'></script>
+  </div>
+</section>
+{% schema %}
+{
+"name": "Contact Map",
+"settings": [
+    {
+      "type": "text",
+      "id": "embed_link_instargram_snapppt",
+      "label": "Snapppt widget link",
+      "default": "https://snapppt.com/widgets/widget_loader/5c2fb6bd-8f5f-4990-a07e-5e2a2f02eb23/grid.js",
+      "info": "info"
+    }
+	],
+	"presets": [{
+      "name": "Shop Instagram",
+      "category": "Collection"
+  	}]
+}
+{% endschema %}

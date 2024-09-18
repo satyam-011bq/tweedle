@@ -1,0 +1,186 @@
+<div data-section-id="{{ section.id }}" class="section__home-about-us-content-box layout-{{ section.settings.preset }} lg-mt-100 md-mt-70 xs-mt-50">
+  <div class="container">
+    {% case section.settings.preset %}
+    {% when 'style_2' %}
+      <div class="aboutus-content-box row">
+        <div class="col-md-6">
+          <h3 class="special-font">{{ section.settings.content_sub_title }}</h3>
+          <h1>{{ section.settings.content_title }}</h1>
+          <p>
+            {{ section.settings.content_text }}
+          </p>
+        </div>
+        <div class="col-md-6">
+          <div class="aboutus-content-box__right">
+            <img src="{{ section.settings.image | img_url: 'master' }}" />
+            {% if section.settings.video_id != blank %}
+            {% if section.settings.video_source == 'vimeo' %}
+              <a class="play-video" href="https://player.vimeo.com/video/{{section.settings.video_id}}?autoplay=1" data-rel="lightcase">
+              {% else %}
+              <a class="play-video" href="//www.youtube.com/embed/{{section.settings.video_id}}?version=3" data-rel="lightcase">
+              {% endif %}
+                <span>
+                  <svg>
+                   <use xlink:href="#karic-play-video" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                  </svg>
+                </span>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="aboutus-content-box row">
+        <div class="col-sm-12">
+          <div class="aboutus-content-box__content text-center">
+            <h1>{{ section.settings.content_title }}</h1>
+            <h2 class="special-font">{{ section.settings.content_sub_title }}</h2>
+            <p>
+              {{ section.settings.content_text }}
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endcase %}
+  </div>
+</div>
+{% if section.settings.enable_style == true %}
+<span class="custom-styles-css">
+body div[data-section-id="{{ section.id }}"]{
+  {% if section.settings.style_top != '' %}
+  margin-top:{{ section.settings.style_top }}px;
+  {% endif %}
+  {% if section.settings.style_bottom != '' %}
+  margin-bottom:{{ section.settings.style_bottom }}px;
+  {% endif %}
+  {% if section.settings.style_left != '' %}
+  margin-left:{{ section.settings.style_left }}px;
+  {% endif %}
+  {% if section.settings.style_right != '' %}
+  margin-right:{{ section.settings.style_right }}px;
+  {% endif %}
+}
+</span>
+{% endif %}
+{% schema %}
+{
+  "name": "Content Box",
+  "settings": [{
+      "type": "header",
+      "content": "Content Box Settings"
+    },
+    {
+      "type": "select",
+      "id": "preset",
+      "label": "Preset",
+      "options": [
+    {
+      "value": "style_1",
+      "label": "Style 1"
+    },
+    {
+      "value": "style_2",
+      "label": "Style 2"
+    }
+    ],
+    "default": "style_1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "content_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "content_sub_title",
+      "label": "Sub Title"
+    },
+    {
+      "type": "textarea",
+      "id": "content_text",
+      "label": "Content"
+    },
+    {
+    "type": "select",
+    "id": "video_source",
+    "label": "Video Source",
+    "options": [
+    {
+    "value": "youtube",
+    "label": "Youtube"
+    },
+    {
+    "value": "vimeo",
+    "label": "Vimeo"
+    }
+    ],
+    "default": "vimeo"
+    },
+    {
+      "type": "text",
+      "id": "video_id",
+      "label": "Video",
+      "placeholder": "Vimeo or Youtube video ID"
+    },
+    {
+      "type": "header",
+      "content": "Styles Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_style",
+      "default": false,
+      "label": "Enable Style Settings"
+    },
+    {
+      "type": "range",
+      "id": "style_top",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_bottom",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_left",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "style_right",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Right",
+      "default": 0
+    }
+  ],
+  "presets": [{
+    "name": "AboutUs Box",
+    "category": "Content"
+  }]
+}
+{% endschema %}

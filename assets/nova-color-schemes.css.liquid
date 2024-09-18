@@ -1,0 +1,8 @@
+.nova-color-shemes {
+  --nova-body-background: {{ settings.bg_color | default: "#FFF" }};
+  --nova-color-text: {{ settings.text_color | default: "#888" }};
+  --nova-primary-color: {{ settings.theme_color | default: "#000" }};
+  --nova-secondary-color: {{ settings.secondary_color | default: "#000" }};
+  --nova-heading-color: {{ settings.heading_color | default: "#000" }};
+  --nova-border-color: {{ settings.site_border_color | default: "#ccc" }};
+}
